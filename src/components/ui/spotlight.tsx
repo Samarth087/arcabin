@@ -1,85 +1,81 @@
 "use client";
-import React, { useRef, useState, useCallback, useEffect } from "react";
-import { motion, useSpring, useTransform, SpringOptions } from "motion/react";
+
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { cn } from "@/lib/utils";
 
-export type SpotlightProps = {
+type GlowCardProps = {
   className?: string;
-  size?: number;
-  springOptions?: SpringOptions;
+  children?: React.ReactNode;
+  radius?: number;
 };
 
-export function Spotlight({
+export function GlowCard({
   className,
-  size = 200,
-  springOptions = { bounce: 0 },
-}: SpotlightProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [parentElement, setParentElement] = useState<HTMLElement | null>(null);
+  children,
+  radius = 320,
+}: GlowCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const mouseX = useSpring(0, springOptions);
-  const mouseY = useSpring(0, springOptions);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const opacity = useMotionValue(0);
 
-  const spotlightLeft = useTransform(mouseX, (x) => `${x - size / 2}px`);
-  const spotlightTop = useTransform(mouseY, (y) => `${y - size / 2}px`);
+  const x = useSpring(mouseX, { stiffness: 300, damping: 40 });
+  const y = useSpring(mouseY, { stiffness: 300, damping: 40 });
+  const o = useSpring(opacity, { stiffness: 200, damping: 30 });
 
   useEffect(() => {
-    if (containerRef.current) {
-      const parent = containerRef.current.parentElement;
-      if (parent) {
-        parent.style.position = "relative";
-        parent.style.overflow = "hidden";
-        setParentElement(parent);
-      }
+    function handleMove(e: MouseEvent) {
+      if (!ref.current) return;
+
+      const rect = ref.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // glow strength based on distance
+      const strength = Math.max(0, 1 - distance / radius);
+      opacity.set(strength);
+
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
     }
-  }, []);
 
-  const handleMouseMove = useCallback(
-    (event: MouseEvent) => {
-      if (!parentElement) return;
-      const { left, top } = parentElement.getBoundingClientRect();
-      mouseX.set(event.clientX - left);
-      mouseY.set(event.clientY - top);
-    },
-    [mouseX, mouseY, parentElement]
-  );
-
-  useEffect(() => {
-    if (!parentElement) return;
-
-    const abortController = new AbortController();
-
-    parentElement.addEventListener("mousemove", handleMouseMove, {
-      signal: abortController.signal,
-    });
-    parentElement.addEventListener("mouseenter", () => setIsHovered(true), {
-      signal: abortController.signal,
-    });
-    parentElement.addEventListener("mouseleave", () => setIsHovered(false), {
-      signal: abortController.signal,
-    });
-
-    return () => {
-      abortController.abort();
-    };
-  }, [parentElement, handleMouseMove]);
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, [radius]);
 
   return (
-    <motion.div
-      ref={containerRef}
+    <div
+      ref={ref}
       className={cn(
-        "pointer-events-none absolute rounded-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops),transparent_80%)] blur-xl transition-opacity duration-200",
-        "from-zinc-100 via-zinc-200 to-zinc-400 dark:from-zinc-50 dark:via-zinc-100 dark:to-zinc-200",
-        isHovered ? "opacity-100" : "opacity-0",
+        "relative overflow-hidden rounded-xl",
+        "bg-zinc-950 border border-zinc-800",
         className
       )}
-      style={{
-        width: size,
-        height: size,
-        left: spotlightLeft,
-        top: spotlightTop,
-      }}
-    />
+    >
+      {/* BLUE GLOW */}
+      <motion.div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          opacity: o,
+          background: `
+            radial-gradient(
+              420px circle at ${x}px ${y}px,
+              rgba(59,130,246,0.45),
+              rgba(59,130,246,0.15) 40%,
+              transparent 70%
+            )
+          `,
+        }}
+      />
+
+      {/* CONTENT */}
+      <div className="relative z-10">{children}</div>
+    </div>
   );
 }
