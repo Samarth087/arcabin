@@ -29,7 +29,7 @@ const transitionVariants = {
 
 const HeroView = () => {
   return (
-    <main className="overflow-hidden">
+    <main className="mask-b-from-55% overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 isolate hidden opacity-65 contain-strict lg:block"
@@ -39,7 +39,7 @@ const HeroView = () => {
         <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
       </div>
       <section>
-        <div className="relative pt-24 md:pt-36">
+        <div className=" relative pt-24 md:pt-36">
           <AnimatedGroup
             variants={{
               container: {
@@ -70,7 +70,7 @@ const HeroView = () => {
             <Image
               src="https://ik.imagekit.io/lrigu76hy/tailark/night-background.jpg?updatedAt=1745733451120"
               alt="background"
-              className="hidden size-full dark:block"
+              className="hidden size-full dark:block -z-20"
               width="3276"
               height="4095"
             />
@@ -78,7 +78,7 @@ const HeroView = () => {
 
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"
+            className="absolute inset-0 -z-20 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"
           />
 
           <div className="mx-auto max-w-7xl px-6">
@@ -116,9 +116,12 @@ const HeroView = () => {
                 preset="fade-in-blur"
                 speedSegment={0.3}
                 as="h1"
-                className="mx-auto mt-8 max-w-4xl text-balance text-5xl max-md:font-semibold md:text-7xl lg:mt-16 xl:text-[5.25rem]"
+                className="mx-auto mt-5 max-w-4xl text-balance text-5xl max-md:font-semibold md:text-7xl lg:mt-8 xl:text-[5.25rem]"
               >
-                Modern Solutions for Customer Engagement
+                Crafted{" "}
+                <span className="font-display italic font-light">Websites</span>{" "}
+                <span className="font-display italic font-light">Lasting</span>{" "}
+                Impressions
               </TextEffect>
               <TextEffect
                 per="line"
@@ -188,22 +191,32 @@ const HeroView = () => {
               ...transitionVariants,
             }}
           >
-            <div className="mask-b-from-55% relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
-              <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                <Image
-                  className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                  src="/mail2.png"
-                  alt="app screen"
-                  width="2700"
-                  height="1440"
-                />
-                <Image
-                  className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                  src="/mail2-light.png"
-                  alt="app screen"
-                  width="2700"
-                  height="1440"
-                />
+            <div className="">
+              <div className="relative mx-auto mt-8 w-full px-2 sm:mt-12 md:mt-20">
+                <div className="absolute left-1/2 top-[60%] -z-10 h-[170%] w-[170%] -translate-x-1/2 -translate-y-1/2">
+                  <Image
+                    src="/images/Adobe Express - file.png"
+                    alt="Background"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-[70%] overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+                  <Image
+                    className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
+                    src="/mail2.png"
+                    alt="app screen"
+                    width="2700"
+                    height="1440"
+                  />
+                  <Image
+                    className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
+                    src="/mail2-light.png"
+                    alt="app screen"
+                    width="2700"
+                    height="1440"
+                  />
+                </div>
               </div>
             </div>
           </AnimatedGroup>
