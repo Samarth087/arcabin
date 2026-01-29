@@ -9,6 +9,8 @@ import React from "react";
 import HeroSectionHeader from "../_widget/heroSectionHeader";
 import HeroCodePanel from "../_widget/heroSectionCodeDisplay";
 import HeroCardsGrid from "../_widget/heroCardGrid";
+import { vscodeTree } from "@/constant/vscodeFolderData";
+import { VscodeExplorer } from "../_layout/navProject";
 
 const transitionVariants = {
   item: {
@@ -204,18 +206,21 @@ const HeroView = () => {
                     className="object-contain"
                   />
                 </div>
+
                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 relative mx-auto max-w-[70%] overflow-hidden rounded-2xl border p-2 shadow-lg shadow-zinc-950/15 ring-1 backdrop-blur-lg">
                   <div className="aspect-15/8 bg-background rounded-md">
                     <HeroSectionHeader />
                     <div>
-                      <div className="flex flex-1 min-h-0">
+                      {/* Explorer */}
+                      <div className="flex flex-1 h-full">
+                      <VscodeExplorer tree={vscodeTree} />
                         {/* Left: Code */}
                         <div className="w-3/5 border-r">
                           <HeroCodePanel />
                         </div>
 
                         {/* Right: Cards */}
-                        <div className="w-2/5" id="hero-cards-column">
+                        <div className="w-2/5 h-full" id="hero-cards-column">
                           <HeroCardsGrid />
                         </div>
                       </div>
