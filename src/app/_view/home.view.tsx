@@ -3,7 +3,6 @@
 import { Header } from "@/components/layout/headerLayout";
 import HeroView from "./hero.view";
 
-
 const HomeView = () => {
   return (
     <div className="">
