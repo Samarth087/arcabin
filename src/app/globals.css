@@ -47,7 +47,7 @@
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 
-   @keyframes marquee {
+  @keyframes marquee {
     from {
       transform: translateX(0);
     }
@@ -57,14 +57,14 @@
   }
 
   @keyframes marquee-reverse {
-  from {
-    transform: translateX(calc(-100% - var(--gap)));
+    from {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
- 
+
   @keyframes marquee-vertical {
     from {
       transform: translateY(0);
@@ -185,3 +185,51 @@
   animation: marquee-reverse var(--duration, 40s) linear infinite;
 }
 
+.portfolio-track {
+  will-change: transform;
+}
+
+.portfolio-card img {
+  will-change: transform, border-radius;
+  transform-origin: center;
+}
+
+.portfolio-hero {
+  will-change: width, height, transform, border-radius;
+}
+
+.portfolio-hero img {
+  will-change: transform;
+}
+
+.portfolio-stack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+.stack-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.stack-item {
+  overflow: hidden;
+  opacity: 1;
+}
+
+.hero-item {
+  opacity: 1;
+  transform: scale(1);
+  border-radius: 0;
+}

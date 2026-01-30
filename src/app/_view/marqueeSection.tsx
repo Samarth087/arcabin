@@ -37,7 +37,7 @@ const MarqueeSection = () => {
   ];
 
   return (
-    <div className="relative flex w-full flex-col items-center justify-center gap-1 overflow-hidden py-8">
+    <div className="relative flex w-full flex-col items-center justify-center gap-1 overflow-hidden pt-12">
       {/* Marquee moving left to right (default) */}
       <Marquee pauseOnHover repeat={3} className="[--duration:120s]">
         {testimonials.map((review, index) => (
@@ -79,12 +79,32 @@ const MarqueeSection = () => {
       {/* Stylish gradient overlays */}
       <div
         className="pointer-events-none
-    absolute left-0 top-0 h-3/4 w-[55%]
-    bg-background
-    [mask-image:linear-gradient(to_right,black,black_60%,transparent)]
-    [-webkit-mask-image:linear-gradient(to_right,black,black_60%,transparent)]"
+            absolute left-0 top-10 h-1/3 w-[55%]
+            bg-background
+            [mask-image:linear-gradient(to_right,black, black_30%, transparent)]
+            [-webkit-mask-image:linear-gradient(to_right,black,black_60%,transparent)]"
       ></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-background/95 to-transparent"></div>
+      <div
+        className="pointer-events-none
+            absolute left-0 top-[35%] h-1/3 w-[45%]
+            bg-background
+            [mask-image:linear-gradient(to_right,black, black_30%, transparent)]
+            [-webkit-mask-image:linear-gradient(to_right,black,black_50%,transparent)]"
+      ></div>
+      <div
+        className="pointer-events-none
+            absolute right-0 top-1/3 h-1/3 w-[25%]
+            bg-background 
+            [mask-image:linear-gradient(to_left,black, black_30%, transparent)]
+            [-webkit-mask-image:linear-gradient(to_left,black,black_60%,transparent)]"
+      ></div>
+      <div
+        className="pointer-events-none
+            absolute right-0 top-2/3 h-1/3 w-[45%]
+            bg-background
+            [mask-image:linear-gradient(to_left, black, black_30%, transparent)]
+            [-webkit-mask-image:linear-gradient(to_left,black,black_60%,transparent)]"
+      ></div>
       <div className="pointer-events-none absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-background/90 to-transparent"></div>
       <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-background/90 to-transparent"></div>
     </div>
