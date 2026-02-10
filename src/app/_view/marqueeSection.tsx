@@ -91,30 +91,37 @@ const MarqueeSection = () => {
             [mask-image:linear-gradient(to_right,black, black_30%, transparent)]
             [-webkit-mask-image:linear-gradient(to_right,black,black_50%,transparent)]"
       ></div>
-      <div
+      {/* <div
         className="
     pointer-events-none
-    absolute right-0 top-[20%] w-[25%] h-[70%]
+    absolute right-0 top-[30%] w-[30%] h-[100%]
     bg-background
 
     mask-radial-farthest-side
     mask-radial-at-[100%_50%]
-    mask-radial-from-70%
-    mask-radial-via-50%
+    mask-radial-from-30%
+    mask-radial-via-70%
     mask-radial-to-90%
 
     mask-no-repeat
   "
+      ></div> */}
+      <div
+        className="pointer-events-none
+            absolute right-0 top-1/3 h-1/3 w-[25%]
+            bg-background
+            [mask-image:linear-gradient(to_left, black, black_30%, transparent)]
+            [-webkit-mask-image:linear-gradient(to_left,black,black_60%,transparent)]"
       ></div>
-      {/* <div
+      <div
         className="pointer-events-none
             absolute right-0 top-2/3 h-1/3 w-[45%]
             bg-background
             [mask-image:linear-gradient(to_left, black, black_30%, transparent)]
             [-webkit-mask-image:linear-gradient(to_left,black,black_60%,transparent)]"
-      ></div> */}
-      <div className="pointer-events-none absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-background/90 to-transparent"></div>
-      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-background/90 to-transparent"></div>
+      ></div>
+      <div className="pointer-events-none absolute top-0 left-0 w-full h-12 bg-linear-to-b from-background/90 to-transparent"></div>
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-linear-to-t from-background/90 to-transparent"></div>
     </div>
   );
 };

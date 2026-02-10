@@ -5,6 +5,8 @@ import HeroView from "./hero.view";
 import CloudLogoSection from "./cloudLogoSection";
 import MarqueeSection from "./marqueeSection";
 import PortfolioSection from "./portfolicSection";
+import FeatureGrid from "./featureSection";
+import ServicesMarquee from "./serviceMarquee";
 
 const HomeView = () => {
   return (
@@ -14,6 +16,8 @@ const HomeView = () => {
       <CloudLogoSection />
       <MarqueeSection />
       <PortfolioSection />
+      <FeatureGrid />
+      <ServicesMarquee />
     </div>
   );
 };

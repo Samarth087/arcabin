@@ -5,13 +5,13 @@ import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { StackCard } from "../_widget/stackCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const PortfolioSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const cards = gsap.utils.toArray<HTMLElement>(".stack-card");
 
   useGSAP(
     () => {
@@ -19,7 +19,7 @@ const PortfolioSection = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=4500", // longer because stacks need space
+          end: "+=7500",
           scrub: true,
           pin: true,
         },
@@ -30,14 +30,24 @@ const PortfolioSection = () => {
     ========================== */
       tl.fromTo(
         cardRef.current,
-        { x: "40vw" },
-        { x: 0, duration: 3, ease: "none" },
+        {
+          x: "40vw",
+          y: "-50%",
+          xPercent: -50,
+        },
+        {
+          x: 0,
+          y: "-50%",
+          xPercent: -50,
+          duration: 3,
+          ease: "none",
+        },
       );
 
       /* =========================
        PHASE 2 — lock
     ========================== */
-      tl.to(cardRef.current, { duration: 0.5 });
+      tl.to(cardRef.current, { duration: 2.5 });
 
       /* =========================
        PHASE 3 — fullscreen morph
@@ -45,9 +55,11 @@ const PortfolioSection = () => {
       tl.to(cardRef.current, {
         width: "100vw",
         height: "100vh",
+        left: 0,
         top: 0,
         x: 0,
         y: 0,
+        xPercent: 0,
         borderRadius: 0,
         duration: 3,
         ease: "power3.inOut",
@@ -66,15 +78,21 @@ const PortfolioSection = () => {
         /* current card: bottom → center */
         tl.fromTo(
           current,
-          { yPercent: 100 }, // start BELOW viewport
-          { yPercent: 0, duration: 5, ease: "none" }, // land CENTER
+          {
+            y: window.innerHeight, // fully below viewport
+          },
+          {
+            y: 0, // perfectly aligned at top
+            duration: 5,
+            ease: "none",
+          },
           "+=0.6",
         );
 
         /* lock */
         tl.to(current, { duration: 1.5 });
 
-        /* 👇 HERO HANDOFF (only once, on first stack card) */
+        /* HERO HANDOFF (only once, on first stack card) */
         if (index === 0) {
           tl.to(
             cardRef.current,
@@ -101,6 +119,43 @@ const PortfolioSection = () => {
             "-=4",
           );
         }
+
+        const content = current.querySelector(".stack-content") as HTMLElement;
+
+        tl.fromTo(
+          content,
+          {
+            opacity: 0,
+            y: 30,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            delay: 1,
+            duration: 1.5,
+            ease: "power3.out",
+          },
+          "-=1.5", // triggers while card is pinned
+        );
+
+        // fade out previous card content
+        if (prev) {
+          const prevContent = prev.querySelector(
+            ".stack-content",
+          ) as HTMLElement;
+          if (prevContent) {
+            tl.to(
+              prevContent,
+              {
+                opacity: 0,
+                y: -20,
+                duration: 0.8,
+                ease: "power2.in",
+              },
+              "<",
+            );
+          }
+        }
       });
       /* =========================
        PHASE 4 — hero text
@@ -124,12 +179,13 @@ const PortfolioSection = () => {
       <div
         ref={cardRef}
         className="
-          portfolio-hero hero-item 
-          absolute left-1/2 top-1/2
+          portfolio-hero hero-item
+          absolute
+          left-[50%] top-[50%]
           w-[50vw] h-[50vh]
-          -translate-x-1/2 -translate-y-1/2
           rounded-[100px] overflow-hidden
-        "
+          will-change-transform
+          "
       >
         <Image
           src="/images/web-ui-2.webp"
@@ -149,33 +205,24 @@ const PortfolioSection = () => {
 
       {/* STACKED PORTFOLIOS */}
       <div className="portfolio-stack absolute inset-0 pointer-events-none">
-        <div className="stack-card stack-item">
-          <Image
-            src="/images/web-ui-8.webp"
-            alt="Portfolio"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-        <div className="stack-card stack-item">
-          <Image
-            src="/images/web-ui-3.webp"
-            alt="Portfolio"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-        <div className="stack-card stack-item">
-          <Image
-            src="/images/web-ui-6.webp"
-            alt="Portfolio"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
+        <StackCard
+          image="/images/web-ui-svg-2.svg"
+          title="Lumière Duplex"
+          description="A modern desert retreat blending architecture and nature."
+          index={0}
+        />
+        <StackCard
+          image="/images/web-ui-svg-3.svg"
+          title="Solace Pavilion"
+          description="Minimal living space with panoramic views."
+          index={1}
+        />
+        <StackCard
+          image="/images/web-ui-svg-4.svg"
+          title="Eon Capsule"
+          description="Future-forward living concept."
+          index={2}
+        />
       </div>
     </section>
   );
