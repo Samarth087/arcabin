@@ -7,6 +7,8 @@ import MarqueeSection from "./marqueeSection";
 import PortfolioSection from "./portfolicSection";
 import FeatureGrid from "./featureSection";
 import ServicesMarquee from "./serviceMarquee";
+import FAQsSection from "./faqSection";
+import FooterLayout from "@/components/layout/footerLayout";
 
 const HomeView = () => {
   return (
@@ -18,6 +20,8 @@ const HomeView = () => {
       <PortfolioSection />
       <FeatureGrid />
       <ServicesMarquee />
+      <FAQsSection />
+      <FooterLayout />
     </div>
   );
 };
