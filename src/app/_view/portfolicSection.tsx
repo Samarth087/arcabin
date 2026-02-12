@@ -6,6 +6,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { StackCard } from "../_widget/stackCard";
+import { Marquee } from "@/components/ui/marquee";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,21 +29,21 @@ const PortfolioSection = () => {
       /* =========================
        PHASE 1 — right → center
     ========================== */
-      tl.fromTo(
-        cardRef.current,
-        {
-          x: "40vw",
-          y: "-50%",
-          xPercent: -50,
-        },
-        {
-          x: 0,
-          y: "-50%",
-          xPercent: -50,
-          duration: 3,
-          ease: "none",
-        },
-      );
+      // tl.fromTo(
+      //   cardRef.current,
+      //   {
+      //     x: "40vw",
+      //     y: "-50%",
+      //     xPercent: -50,
+      //   },
+      //   {
+      //     x: 0,
+      //     y: "-50%",
+      //     xPercent: -50,
+      //     duration: 3,
+      //     ease: "none",
+      //   },
+      // );
 
       /* =========================
        PHASE 2 — lock
@@ -53,13 +54,7 @@ const PortfolioSection = () => {
        PHASE 3 — fullscreen morph
     ========================== */
       tl.to(cardRef.current, {
-        width: "100vw",
-        height: "100vh",
-        left: 0,
-        top: 0,
-        x: 0,
-        y: 0,
-        xPercent: 0,
+        scale: 2, // adjust until it fills viewport
         borderRadius: 0,
         duration: 3,
         ease: "power3.inOut",
@@ -175,17 +170,36 @@ const PortfolioSection = () => {
       ref={sectionRef}
       className="relative h-screen overflow-hidden bg-background"
     >
+      <div className="absolute inset-0 z-1 flex items-center overflow-hidden pointer-events-none">
+        <Marquee
+          repeat={6}
+          
+          className="text-[14vw] font-semibold text-white/30 tracking-tight [--duration:40s]"
+        >
+          <p className="mx-10 bg-linear-to-b from-primary to-danger bg-clip-text text-transparent">ArkCabin<span className="text-[9vw]">®</span></p>
+        </Marquee>
+      </div>
+      {/* <Marquee repeat={6} className="text-sm md:text-2xl">
+        <img
+          src="/images/ArkCabin.svg" // replace with your logo
+          alt="logo"
+          className="w-[90%]"
+        />
+      </Marquee> */}
+
       {/* HERO CARD */}
       <div
         ref={cardRef}
         className="
-          portfolio-hero hero-item
-          absolute
-          left-[50%] top-[50%]
-          w-[50vw] h-[50vh]
-          rounded-[100px] overflow-hidden
-          will-change-transform
-          "
+    portfolio-hero hero-item
+    absolute
+    left-[50%] top-[50%]
+    -translate-x-1/2 -translate-y-1/2
+    w-[50vw] h-[50vh]
+    rounded-[100px] overflow-hidden
+    will-change-transform
+    z-5
+  "
       >
         <Image
           src="/images/web-ui-2.webp"
@@ -197,14 +211,14 @@ const PortfolioSection = () => {
       </div>
 
       {/* CONTENT */}
-      <div className="portfolio-content absolute inset-0 flex items-end p-[5vw] opacity-0 pointer-events-none">
+      <div className="portfolio-content absolute inset-0 flex items-end p-[5vw] opacity-0 pointer-events-none ">
         <h2 className="text-white text-[clamp(2rem,5vw,5rem)]">
           Classic Capsule®
         </h2>
       </div>
 
       {/* STACKED PORTFOLIOS */}
-      <div className="portfolio-stack absolute inset-0 pointer-events-none">
+      <div className="portfolio-stack absolute inset-0 pointer-events-none z-10">
         <StackCard
           image="/images/web-ui-svg-2.svg"
           title="Lumière Duplex"

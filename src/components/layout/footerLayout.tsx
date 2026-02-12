@@ -3,15 +3,15 @@ import React from "react";
 
 const FooterLayout = () => {
   return (
-    <footer className="relative bg-background/5 border-t border-foreground/10">
+    <footer className="relative bg-background/5 border-t border-foreground/10 mt-28">
       {/* ===== Large Blurred Background Logo ===== */}
-      {/* <div className="absolute inset-0 -top-100 flex items-center justify-center pointer-events-none">
+      <div className="absolute inset-0 -top-100 opacity-60 flex items-center justify-center pointer-events-none">
         <img
-          src="/images/logo.png" // replace with your logo
+          src="/images/ArkCabin-logo.svg" // replace with your logo
           alt="logo"
-          className="w-[700px]"
+          className="w-[500px]"
         />
-      </div> */}
+      </div>
 
       {/* ===== Social Glass Bar ===== */}
       <div className="relative backdrop-blur-xl bg-background/5">
@@ -52,7 +52,7 @@ const FooterLayout = () => {
         {/* Company */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Company</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm">
+          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
             <li className="hover:text-foreground transition">About</li>
             <li className="hover:text-foreground transition">Approach</li>
             <li className="hover:text-foreground transition">Work</li>
@@ -63,7 +63,7 @@ const FooterLayout = () => {
         {/* Services */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Services</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm">
+          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
             <li className="hover:text-foreground transition">Crafted Websites</li>
             <li className="hover:text-foreground transition">Website Redesign</li>
             <li className="hover:text-foreground transition">eCommerce Design</li>
@@ -74,7 +74,7 @@ const FooterLayout = () => {
         {/* Resources */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Resources</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm">
+          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
             <li className="hover:text-foreground transition">Blog</li>
             <li className="hover:text-foreground transition">Templates</li>
             <li className="hover:text-foreground transition">Process</li>
@@ -85,7 +85,7 @@ const FooterLayout = () => {
         {/* Contact */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Contact</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm">
+          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
             <li>Email: contact@arkcabin.com</li>
             <li>Phone: +91 7000460610</li>
             <li>WhatsApp</li>

@@ -3,6 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { roboto, fraunces } from "./fonts";
 import SmoothScrollProvider from "@/provider/smoothScrollProvider";
+import { Header } from "@/components/layout/headerLayout";
+import FooterLayout from "@/components/layout/footerLayout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +29,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <SmoothScrollProvider>
+            <Header />
+            {children}
+            <FooterLayout />
+            </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>

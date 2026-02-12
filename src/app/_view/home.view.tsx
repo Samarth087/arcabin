@@ -13,7 +13,6 @@ import FooterLayout from "@/components/layout/footerLayout";
 const HomeView = () => {
   return (
     <div className="">
-      <Header />
       <HeroView />
       <CloudLogoSection />
       <MarqueeSection />
@@ -21,7 +20,6 @@ const HomeView = () => {
       <FeatureGrid />
       <ServicesMarquee />
       <FAQsSection />
-      <FooterLayout />
     </div>
   );
 };
