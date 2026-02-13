@@ -7,8 +7,42 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { StackCard } from "../_widget/stackCard";
 import { Marquee } from "@/components/ui/marquee";
+import { portfolioGrid, portfolioGridSecond } from "@/constant/protfolioData";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const slides = [
+  {
+    title: "Lumière Duplex",
+    description:
+      "A modern desert retreat blending architecture and nature seamlessly. Large glass facades allow natural light to flood the interior, blurring the lines between indoor and outdoor living.",
+    location: "Joshua Tree, CA",
+    tags: ["Residential", "Sustainable", "Modern"],
+    cta: "View Case Study",
+    feature: { label: "Area", value: "450 m²" },
+    data: portfolioGrid,
+  },
+  {
+    title: "Solace Pavilion",
+    description:
+      "Minimal living space with panoramic views designed for clarity and peace of mind. The structure utilizes locally sourced timber and stone.",
+    location: "Kyoto, Japan",
+    tags: ["Minimalist", "Zen", "Hideaway"],
+    cta: "Explore Design",
+    feature: { label: "Material", value: "Timber" },
+    data: portfolioGridSecond,
+  },
+  {
+    title: "Eon Capsule",
+    description:
+      "Future-forward living concept pushing the boundaries of space efficiency. Features AI-integrated home automation and self-sustaining energy systems.",
+    location: "Neo-Tokyo, JP",
+    tags: ["Futuristic", "Concept", "Smart Home"],
+    cta: "Techn Stack",
+    feature: { label: "Tech", value: "AI Core" },
+    data: portfolioGrid,
+  },
+];
 
 const PortfolioSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -117,40 +151,40 @@ const PortfolioSection = () => {
 
         const content = current.querySelector(".stack-content") as HTMLElement;
 
-        tl.fromTo(
-          content,
-          {
-            opacity: 0,
-            y: 30,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            delay: 1,
-            duration: 1.5,
-            ease: "power3.out",
-          },
-          "-=1.5", // triggers while card is pinned
-        );
+        // tl.fromTo(
+        //   content,
+        //   {
+        //     opacity: 0,
+        //     y: 30,
+        //   },
+        //   {
+        //     opacity: 1,
+        //     y: 0,
+        //     delay: 1,
+        //     duration: 1.5,
+        //     ease: "power3.out",
+        //   },
+        //   "-=1.5",
+        // );
 
         // fade out previous card content
-        if (prev) {
-          const prevContent = prev.querySelector(
-            ".stack-content",
-          ) as HTMLElement;
-          if (prevContent) {
-            tl.to(
-              prevContent,
-              {
-                opacity: 0,
-                y: -20,
-                duration: 0.8,
-                ease: "power2.in",
-              },
-              "<",
-            );
-          }
-        }
+        // if (prev) {
+        //   const prevContent = prev.querySelector(
+        //     ".stack-content",
+        //   ) as HTMLElement;
+        //   if (prevContent) {
+        //     tl.to(
+        //       prevContent,
+        //       {
+        //         opacity: 0,
+        //         y: -20,
+        //         duration: 0.8,
+        //         ease: "power2.in",
+        //       },
+        //       "<",
+        //     );
+        //   }
+        // }
       });
       /* =========================
        PHASE 4 — hero text
@@ -173,10 +207,11 @@ const PortfolioSection = () => {
       <div className="absolute inset-0 z-1 flex items-center overflow-hidden pointer-events-none">
         <Marquee
           repeat={6}
-          
           className="text-[14vw] font-semibold text-white/30 tracking-tight [--duration:40s]"
         >
-          <p className="mx-10 bg-linear-to-b from-primary to-danger bg-clip-text text-transparent">ArkCabin<span className="text-[9vw]">®</span></p>
+          <p className="mx-10 bg-linear-to-b from-primary to-danger bg-clip-text text-transparent">
+            ArkCabin<span className="text-[9vw]">®</span>
+          </p>
         </Marquee>
       </div>
       {/* <Marquee repeat={6} className="text-sm md:text-2xl">
@@ -219,24 +254,15 @@ const PortfolioSection = () => {
 
       {/* STACKED PORTFOLIOS */}
       <div className="portfolio-stack absolute inset-0 pointer-events-none z-10">
-        <StackCard
-          image="/images/web-ui-svg-2.svg"
-          title="Lumière Duplex"
-          description="A modern desert retreat blending architecture and nature."
-          index={0}
-        />
-        <StackCard
-          image="/images/web-ui-svg-3.svg"
-          title="Solace Pavilion"
-          description="Minimal living space with panoramic views."
-          index={1}
-        />
-        <StackCard
-          image="/images/web-ui-svg-4.svg"
-          title="Eon Capsule"
-          description="Future-forward living concept."
-          index={2}
-        />
+        {slides.map((slide, i) => (
+          <StackCard
+            key={i}
+            title={slide.title}
+            description={slide.description}
+            index={i}
+            data={slide.data}
+          />
+        ))}
       </div>
     </section>
   );
