@@ -1,11 +1,12 @@
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
+import type { BentoCardProps } from "@/components/ui/bento-grid";
 import { cn } from "@/lib/utils";
 
 interface StackCardProps {
   title: string;
   description: string;
   index: number;
-  data: Array<Record<string, unknown>>;
+  data: BentoCardProps[];
   tags?: string[];
   location?: string;
   cta?: string;
