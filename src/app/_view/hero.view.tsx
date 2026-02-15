@@ -2,8 +2,6 @@ import { AnimatedGroup } from "@/components/ui/animatedGroup";
 import { Button } from "@/components/ui/button";
 import { CursorCard, CursorCardsContainer } from "@/components/ui/cursor-card";
 import { TextEffect } from "@/components/ui/textEffect";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import HeroSectionHeader from "../_widget/heroSectionHeader";
@@ -105,24 +103,12 @@ const HeroView = () => {
                   <CursorCardsContainer className="w-fit rounded-full p-px">
                     <CursorCard>
                       <Link
-                        href="#link"
-                        className="group mx-auto flex w-fit items-center gap-4 rounded-full p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:shadow-zinc-950"
+                        href="/contact"
+                        className="mx-auto flex w-fit items-center rounded-full px-4 py-1 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:shadow-zinc-950"
                       >
                         <span className="text-foreground text-sm">
-                          Design in Detail.
+                          Design. Develop. Automate.
                         </span>
-                        <span className=" block h-4 w-0.5 bg-background"></span>
-
-                        <div className="bg-background size-6 overflow-hidden rounded-full duration-500">
-                          <div className="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0">
-                            <span className="flex size-6">
-                              <ArrowRight className="m-auto size-3" />
-                            </span>
-                            <span className="flex size-6">
-                              <ArrowRight className="m-auto size-3" />
-                            </span>
-                          </div>
-                        </div>
                       </Link>
                     </CursorCard>
                   </CursorCardsContainer>
@@ -175,8 +161,8 @@ const HeroView = () => {
                     size="lg"
                     className="rounded-xl px-5 text-base"
                   >
-                    <Link href="#link">
-                      <span className="text-nowrap">Start Building</span>
+                    <Link href="/contact">
+                      <span className="text-nowrap">Hire Us</span>
                     </Link>
                   </Button>
                 </div>
@@ -187,7 +173,7 @@ const HeroView = () => {
                   variant="ghost"
                   className="h-10.5 rounded-xl px-5"
                 >
-                  <Link href="#link">
+                  <Link href="/contact?type=demo">
                     <span className="text-nowrap">Request a demo</span>
                   </Link>
                 </Button>

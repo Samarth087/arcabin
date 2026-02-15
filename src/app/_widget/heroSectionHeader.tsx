@@ -4,7 +4,7 @@ import {
   AvatarGroup,
   AvatarImage,
 } from "@/components/ui/avatar";
-import { ChevronLeft, GalleryVerticalEnd, Search } from "lucide-react";
+import { ChevronLeft, GalleryVerticalEnd } from "lucide-react";
 
 const HeroSectionHeader = () => {
   return (

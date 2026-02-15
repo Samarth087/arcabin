@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useMemo, useCallback, JSX } from 'react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 import './TextType.css';
 
@@ -23,7 +23,7 @@ interface TextTypeProps {
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
   reverseMode?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const TextType = ({

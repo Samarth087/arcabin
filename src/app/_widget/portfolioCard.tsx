@@ -11,12 +11,15 @@ const PortfolioCard = ({ img, active }: Props) => {
     <div
       className={`portfolio-card ${
         active ? "active" : ""
-      } flex-shrink-0 w-[80vw] h-[70vh]`}
+      } relative flex-shrink-0 w-[80vw] h-[70vh]`}
     >
-      <img
+      <Image
         src={img}
-        className="w-full h-full object-cover rounded-[32px]"
         alt=""
+        fill
+        sizes="80vw"
+        className="object-cover rounded-[32px]"
+        priority={false}
       />
     </div>
   )

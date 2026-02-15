@@ -1,5 +1,6 @@
-"use client";
+ "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
@@ -36,28 +37,32 @@ export const Header = () => {
               "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
           )}
         >
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
+          <div className="relative flex flex-wrap items-center justify-between gap-6 py-2 lg:gap-0 lg:py-3">
             <div className="flex w-full justify-between lg:w-auto">
               <Link
                 href="/"
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                <img
+                <Image
                   src="/images/ArkCabin-text-logo-updated.svg"
-                  alt=""
+                  alt="ArkCabin"
                   width={150}
+                  height={40}
+                  priority
                 />
               </Link>
 
-              <button
-                onClick={() => setMenuState(!menuState)}
-                aria-label={menuState == true ? "Close Menu" : "Open Menu"}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
-              >
-                <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setMenuState(!menuState)}
+                  aria-label={menuState == true ? "Close Menu" : "Open Menu"}
+                  className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+                >
+                  <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
+                  <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
+                </button>
+              </div>
             </div>
 
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
@@ -89,35 +94,16 @@ export const Header = () => {
                     </li>
                   ))}
                 </ul>
+              
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                 <Button
                   asChild
-                  variant="outline"
                   size="sm"
-                  className={cn(isScrolled && "lg:hidden")}
+                  variant={isScrolled ? "outline" : "default"}
+                  className="lg:inline-flex"
                 >
-                  <Link href="#">
-                    <span>Login</span>
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className={cn(isScrolled && "lg:hidden")}
-                >
-                  <Link href="#">
-                    <span>Sign Up</span>
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
-                >
-                  <Link href="#">
-                    <span>Get Started</span>
-                  </Link>
+                  <Link href="/contact">{isScrolled ? "Contact Us" : "Hire Us"}</Link>
                 </Button>
               </div>
             </div>
