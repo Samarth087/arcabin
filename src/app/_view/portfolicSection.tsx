@@ -149,8 +149,6 @@ const PortfolioSection = () => {
           );
         }
 
-        const content = current.querySelector(".stack-content") as HTMLElement;
-
         // tl.fromTo(
         //   content,
         //   {

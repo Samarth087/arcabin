@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { features } from "@/constant/feature";
 import { TechGrid } from "../_widget/featureGridCard";
-import { AgencyActivityCard } from "../_widget/featureAnimatedList";
 
 const FeatureGrid = () => {
   return (
@@ -90,11 +89,8 @@ const FeatureGrid = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-3 items-start">
-        <div className="flex justify-center lg:justify-start h-[260px]">
-          <AgencyActivityCard />
-        </div>
-        <div className="flex justify-center lg:justify-end">
+      <div className="mx-auto max-w-7xl px-6 flex justify-end">
+        <div>
           <TechGrid />
         </div>
       </div>

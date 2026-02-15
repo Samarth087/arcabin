@@ -1,4 +1,5 @@
 import { ArrowUpRight, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 const FooterLayout = () => {
@@ -6,10 +7,12 @@ const FooterLayout = () => {
     <footer className="relative bg-background/5 border-t border-foreground/10 mt-28">
       {/* ===== Large Blurred Background Logo ===== */}
       <div className="absolute inset-0 -top-100 opacity-60 flex items-center justify-center pointer-events-none">
-        <img
-          src="/images/ArkCabin-logo.svg" // replace with your logo
-          alt="logo"
-          className="w-[500px]"
+        <Image
+          src="/images/ArkCabin-logo.svg"
+          alt="ArkCabin logo"
+          width={500}
+          height={200}
+          className="w-[500px] h-auto"
         />
       </div>
 

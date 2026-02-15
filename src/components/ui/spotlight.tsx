@@ -47,7 +47,7 @@ export function GlowCard({
 
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
-  }, [radius]);
+  }, [radius, mouseX, mouseY, opacity]);
 
   return (
     <div

@@ -4,7 +4,7 @@ import {
   AvatarGroup,
   AvatarImage,
 } from "@/components/ui/avatar";
-import { ChevronLeft, GalleryVerticalEnd, Search } from "lucide-react";
+import { ChevronLeft, GalleryVerticalEnd } from "lucide-react";
 
 const HeroSectionHeader = () => {
   return (
@@ -30,16 +30,12 @@ const HeroSectionHeader = () => {
             <ChevronLeft className="size-4" />
           </div>
         </div>
-
-        {/* File name */}
-        <span className="text-xs text-zinc-400">CardLayout.tsx</span>
       </div>
 
-      {/* Center: Search / context */}
+      {/* Center: File Name */}
       <div className="hidden md:flex">
         <div className="bg-secondary flex items-center gap-2 py-1.5 px-3 rounded-sm min-w-[220px] justify-center">
-          <Search className="size-4 text-zinc-400" />
-          <p className="text-sm text-zinc-300">Development</p>
+          <span className="text-xs text-zinc-400">CardLayout.tsx</span>
         </div>
       </div>
 

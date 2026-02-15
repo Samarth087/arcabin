@@ -1,5 +1,4 @@
 // src/components/layout/vscode-tree.ts
-import { Folder, File } from "lucide-react"
 
 export type TreeNode = {
   id: string
