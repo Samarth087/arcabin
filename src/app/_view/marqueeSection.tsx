@@ -47,7 +47,6 @@ const MarqueeSection = () => {
               alt={`Screenshot ${index + 1}`}
               width={350}
               height={250}
-              style={{ height: "auto" }}
             />
           </div>
         ))}
@@ -61,7 +60,6 @@ const MarqueeSection = () => {
               alt={`Screenshot ${index + 1}`}
               width={350}
               height={250}
-              style={{ height: "auto" }}
             />
           </div>
         ))}
@@ -74,7 +72,6 @@ const MarqueeSection = () => {
               alt={`Screenshot ${index + 1}`}
               width={350}
               height={250}
-              style={{ height: "auto" }}
             />
           </div>
         ))}

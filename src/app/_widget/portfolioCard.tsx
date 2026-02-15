@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
 type Props = {
   img: string;
@@ -15,14 +15,12 @@ const PortfolioCard = ({ img, active }: Props) => {
     >
       <Image
         src={img}
-        alt=""
+        alt="Portfolio image"
         fill
-        sizes="80vw"
         className="object-cover rounded-[32px]"
-        priority={false}
       />
     </div>
-  )
-}
+  );
+};
 
-export default PortfolioCard
+export default PortfolioCard;

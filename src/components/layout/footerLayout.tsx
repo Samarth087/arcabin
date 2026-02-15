@@ -9,9 +9,9 @@ const FooterLayout = () => {
       <div className="absolute inset-0 -top-100 opacity-60 flex items-center justify-center pointer-events-none">
         <Image
           src="/images/ArkCabin-logo.svg"
-          alt="ArkCabin background logo"
+          alt="ArkCabin logo"
           width={500}
-          height={500}
+          height={200}
           className="w-[500px] h-auto"
         />
       </div>
