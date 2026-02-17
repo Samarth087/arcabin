@@ -13,7 +13,12 @@ const FeatureGrid = () => {
         </div>
 
         <div className="space-x-3">
-          <Button className="rounded-full" asChild><Link href="/services">View Services</Link></Button>
+          <Button className="rounded-full" asChild>
+            <Link href="/services">View Services</Link>
+          </Button>
+          <Button variant={"secondary"} className="rounded-full" asChild>
+            <Link href="/portfolio">View Projects</Link>
+          </Button>
         </div>
       </div>
 

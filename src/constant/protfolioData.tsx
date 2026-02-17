@@ -15,7 +15,7 @@ export const portfolioGrid = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
+    className: "md:col-span-1 md:row-span-2 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
     name: "",
@@ -31,7 +31,7 @@ export const portfolioGrid = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
     name: "",
@@ -47,7 +47,7 @@ export const portfolioGrid = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
   },
   {
     name: "",
@@ -63,7 +63,7 @@ export const portfolioGrid = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
+    className: "md:col-span-2 md:row-span-1 lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
   },
   {
     name: "",
@@ -79,7 +79,7 @@ export const portfolioGrid = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
   },
   {
     name: "",
@@ -95,7 +95,7 @@ export const portfolioGrid = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
   },
 ];
 
@@ -114,7 +114,7 @@ export const portfolioGridSecond = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
+    className: "md:col-span-1 md:row-span-2 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
     name: "",
@@ -130,7 +130,7 @@ export const portfolioGridSecond = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
     name: "",
@@ -146,7 +146,7 @@ export const portfolioGridSecond = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
   },
   {
     name: "",
@@ -162,7 +162,7 @@ export const portfolioGridSecond = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
+    className: "md:col-span-2 md:row-span-1 lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
   },
   {
     name: "",
@@ -178,7 +178,7 @@ export const portfolioGridSecond = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
   },
   {
     name: "",
@@ -194,6 +194,6 @@ export const portfolioGridSecond = [
         className="object-cover"
       />
     ),
-    className: "lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
+    className: "md:col-span-1 md:row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
   },
 ];
