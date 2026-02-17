@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+
 import "./globals.css";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { roboto, fraunces } from "./fonts";
@@ -64,8 +66,23 @@ export default function RootLayout({
       className={`${roboto.variable} ${fraunces.variable}`}
     >
       <body className="antialiased" suppressHydrationWarning>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-C5ZS07LW4N"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-C5ZS07LW4N');
+          `}
+        </Script>
         <ThemeProvider
           attribute="class"
+
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
@@ -74,7 +91,7 @@ export default function RootLayout({
             <Header />
             {children}
             <FooterLayout />
-            </SmoothScrollProvider>
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>
