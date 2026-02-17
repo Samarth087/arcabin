@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { FeatureCard } from "@/components/feature-section";
+import { CTASection } from "@/components/cta-section";
 
 const services = [
   {
@@ -91,8 +92,10 @@ export function ServicesView() {
         </div>
       </div>
       
+     
+      
       {/* Process Section - Brief */}
-      <div className="mt-32 border-t border-border/40 pt-24">
+      <div className="mt-32 border-t border-b border-border/40 py-24">
         <div className="grid gap-12 lg:grid-cols-2">
 
             <div>
@@ -122,6 +125,9 @@ export function ServicesView() {
                 </div>
             </div>
         </div>
+      </div>
+       <div className="mb-20">
+        <CTASection />
       </div>
     </div>
   );
