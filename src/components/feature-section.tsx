@@ -41,24 +41,21 @@ export function FeatureCard({
 }) {
 	return (
 		<div
-			className={cn("relative overflow-hidden bg-background p-6", className)}
+			className={cn("relative overflow-hidden bg-background p-8 md:p-10 transition-all duration-500 group", className)}
 			{...props}
 		>
-			<div className="mask-[radial-gradient(farthest-side_at_top,white,transparent)] pointer-events-none absolute top-0 left-1/2 -mt-2 -ml-20 size-full">
-				<GridPattern
-					className="absolute inset-0 size-full stroke-foreground/20"
-					height={40}
-					width={40}
-					x={20}
-				/>
+			{/* Professional Radial Highlight on Hover */}
+			<div className="absolute inset-0 bg-gradient-to-b from-white/[0.07] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+			<div className="relative z-10">
+				<div className="[&_svg]:size-6 text-foreground/40 group-hover:text-white transition-all duration-500 group-hover:scale-110">
+					{feature.icon}
+				</div>
+				<h3 className="mt-8 text-base font-medium text-white group-hover:text-white transition-colors">{feature.title}</h3>
+				<p className="mt-2 font-normal text-muted-foreground/60 text-sm leading-relaxed group-hover:text-white/50 transition-colors">
+					{feature.description}
+				</p>
 			</div>
-			<div className="[&_svg]:size-6 [&_svg]:text-foreground/75">
-				{feature.icon}
-			</div>
-			<h3 className="mt-10 text-sm md:text-base">{feature.title}</h3>
-			<p className="relative z-20 mt-2 font-light text-muted-foreground text-xs">
-				{feature.description}
-			</p>
 		</div>
 	);
 }

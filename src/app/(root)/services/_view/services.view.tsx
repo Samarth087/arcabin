@@ -14,7 +14,13 @@ import {
 } from "lucide-react";
 
 import { FeatureCard } from "@/components/feature-section";
+import { WorkflowSection } from "@/components/workflow-section";
+import { IntegrationsSection } from "@/components/integrations-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
+import CloudLogoSection from "@/app/_view/cloudLogoSection";
+import FAQsSection from "@/app/_view/faqSection";
 import { CTASection } from "@/components/cta-section";
+import { processSteps } from "@/constant/workflow";
 
 const services = [
   {
@@ -73,62 +79,47 @@ export function ServicesView() {
             <TypingText text="Our Expertise" />
           </div>
         </div>
-        <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-white">
           Digital Solutions for <span className="text-primary italic font-display">Growth</span>
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
-          From concept to code, we deliver high-quality digital products. 
+          From concept to code, we deliver high-quality digital products.
           Explore our range of services designed to scale your business.
         </p>
       </div>
 
-      <div className="mx-auto w-full max-w-5xl">
-        <div className="overflow-hidden rounded-lg border">
-            <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 md:grid-cols-3">
-                {services.map((service) => (
-                    <FeatureCard feature={service} key={service.title} />
-                ))}
-            </div>
-        </div>
-      </div>
-      
-     
-      
-      {/* Process Section - Brief */}
-      <div className="mt-32 border-t border-b border-border/40 py-24">
-        <div className="grid gap-12 lg:grid-cols-2">
 
-            <div>
-                <h2 className="text-3xl font-bold tracking-tight md:text-4xl">How We Work</h2>
-                <p className="mt-4 text-muted-foreground">We follow a proven process to ensure every project is delivered on time and exceeds expectations.</p>
-            </div>
-            <div className="grid gap-8 sm:grid-cols-2">
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">01</div>
-                    <h3 className="text-xl font-semibold">Discovery</h3>
-                    <p className="text-sm text-muted-foreground">We dive deep into your goals, audience, and challenges.</p>
-                </div>
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">02</div>
-                    <h3 className="text-xl font-semibold">Design</h3>
-                    <p className="text-sm text-muted-foreground">Crafting intuitive and beautiful interfaces.</p>
-                </div>
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">03</div>
-                    <h3 className="text-xl font-semibold">Development</h3>
-                    <p className="text-sm text-muted-foreground">Building robust, scalable, and clean code.</p>
-                </div>
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">04</div>
-                    <h3 className="text-xl font-semibold">Launch</h3>
-                    <p className="text-sm text-muted-foreground">Deployment, testing, and ongoing support.</p>
-                </div>
-            </div>
+      <div className="mx-auto w-full max-w-5xl mb-32">
+        <div className="overflow-hidden rounded-lg border">
+          <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 md:grid-cols-3">
+            {services.map((service) => (
+              <FeatureCard feature={service} key={service.title} />
+            ))}
+          </div>
         </div>
       </div>
-       <div className="mb-20">
+
+      <IntegrationsSection />
+
+
+      {/* Process Section */}
+      <div className="">
+        <WorkflowSection
+          title="How We Work"
+          items={processSteps}
+        />
+      </div>
+
+      <TestimonialsSection />
+
+      <div className="">
+        <FAQsSection />
+      </div>
+
+      <div className="">
         <CTASection />
       </div>
     </div>
   );
 }
+
