@@ -1,10 +1,9 @@
-import React from 'react'
-import PricingSection from './_view/pricingSection'
+import type { Metadata } from "next";
+import PricingSection from "./_view/pricingSection";
+import { getStaticPageMetadata } from "@/lib/seo";
 
-const PricePage = () => {
-  return (
-    <PricingSection />
-  )
+export const metadata: Metadata = getStaticPageMetadata("pricing");
+
+export default function PricePage() {
+  return <PricingSection />;
 }
-
-export default PricePage
