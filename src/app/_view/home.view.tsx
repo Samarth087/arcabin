@@ -6,6 +6,7 @@ import MarqueeSection from "./marqueeSection";
 import PortfolioSection from "./portfolicSection";
 import FeatureGrid from "./featureSection";
 import ServicesMarquee from "./serviceMarquee";
+import { WorkflowSection } from "@/components/workflow-section";
 import FAQsSection from "./faqSection";
 
 const HomeView = () => {
@@ -17,6 +18,7 @@ const HomeView = () => {
       <PortfolioSection />
       <FeatureGrid />
       <ServicesMarquee />
+      <WorkflowSection />
       <FAQsSection />
     </div>
   );

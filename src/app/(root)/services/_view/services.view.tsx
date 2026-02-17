@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { FeatureCard } from "@/components/feature-section";
+import { WorkflowSection } from "@/components/workflow-section";
 import { CTASection } from "@/components/cta-section";
 
 const services = [
@@ -77,58 +78,64 @@ export function ServicesView() {
           Digital Solutions for <span className="text-primary italic font-display">Growth</span>
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
-          From concept to code, we deliver high-quality digital products. 
+          From concept to code, we deliver high-quality digital products.
           Explore our range of services designed to scale your business.
         </p>
       </div>
 
       <div className="mx-auto w-full max-w-5xl">
         <div className="overflow-hidden rounded-lg border">
-            <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 md:grid-cols-3">
-                {services.map((service) => (
-                    <FeatureCard feature={service} key={service.title} />
-                ))}
-            </div>
+          <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 md:grid-cols-3">
+            {services.map((service) => (
+              <FeatureCard feature={service} key={service.title} />
+            ))}
+          </div>
         </div>
       </div>
-      
-     
-      
-      {/* Process Section - Brief */}
-      <div className="mt-32 border-t border-b border-border/40 py-24">
-        <div className="grid gap-12 lg:grid-cols-2">
+      {/* Process Section */}
+      <div className="mt-32">
+        <WorkflowSection
+          title="How We Work"
+          items={processSteps}
+        />
+      </div>
 
-            <div>
-                <h2 className="text-3xl font-bold tracking-tight md:text-4xl">How We Work</h2>
-                <p className="mt-4 text-muted-foreground">We follow a proven process to ensure every project is delivered on time and exceeds expectations.</p>
-            </div>
-            <div className="grid gap-8 sm:grid-cols-2">
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">01</div>
-                    <h3 className="text-xl font-semibold">Discovery</h3>
-                    <p className="text-sm text-muted-foreground">We dive deep into your goals, audience, and challenges.</p>
-                </div>
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">02</div>
-                    <h3 className="text-xl font-semibold">Design</h3>
-                    <p className="text-sm text-muted-foreground">Crafting intuitive and beautiful interfaces.</p>
-                </div>
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">03</div>
-                    <h3 className="text-xl font-semibold">Development</h3>
-                    <p className="text-sm text-muted-foreground">Building robust, scalable, and clean code.</p>
-                </div>
-                <div className="space-y-2">
-                    <div className="text-4xl font-bold text-primary/20">04</div>
-                    <h3 className="text-xl font-semibold">Launch</h3>
-                    <p className="text-sm text-muted-foreground">Deployment, testing, and ongoing support.</p>
-                </div>
-            </div>
-        </div>
-      </div>
-       <div className="mb-20">
+      <div className="mb-20">
         <CTASection />
       </div>
     </div>
   );
 }
+
+const processSteps = [
+  {
+    title: "Discovery & Strategy",
+    description: "We start by understanding your vision, business goals, and target audience. Market research, technology assessment, and a clear roadmap ensure a solid foundation for success.",
+    stepNumber: "01",
+  },
+  {
+    title: "Planning & Conceptualization",
+    description: "Ideas turn into actionable plans. We define features, user journeys, and technical architecture, ensuring feasibility, timelines, and alignment with your objectives.",
+    stepNumber: "02",
+  },
+  {
+    title: "Design & User Experience",
+    description: "Our creative team crafts intuitive UI/UX designs. Wireframes and prototypes are iterated for clarity, simplicity, and user engagement.",
+    stepNumber: "03",
+  },
+  {
+    title: "Development & Quality Assurance",
+    description: "Our engineers build scalable, robust software and mobile apps while our QA team rigorously tests functionality, performance, security, and usability to ensure flawless delivery.",
+    stepNumber: "04",
+  },
+  {
+    title: "Launch & Deployment",
+    description: "After QA approval, we deploy your solution seamlessly. This includes server setup, app store submission (if applicable), and a smooth transition to the live environment.",
+    stepNumber: "05",
+  },
+  {
+    title: "Continuous Support & Optimization",
+    description: "Our partnership doesn't end at launch. We provide ongoing monitoring, updates, performance optimization, and technical support, ensuring your software or app continues to deliver maximum value.",
+    stepNumber: "06",
+  },
+];
