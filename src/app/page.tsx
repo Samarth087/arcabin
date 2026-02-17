@@ -1,38 +1,8 @@
 import type { Metadata } from "next";
 import HomeView from "./_view/home.view";
+import { getStaticPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Design. Develop. Automate. — Next.js Web Studio",
-  description:
-    "ArkCabin is a design-led Next.js agency delivering websites, apps, and AI automation. Hire us for UX, frontend engineering, and performance.",
-  alternates: { canonical: "/" },
-  keywords: [
-    "Web Design Agency",
-    "Next.js Development",
-    "Frontend Engineering",
-    "UX Design",
-    "AI Automation",
-    "TailwindCSS",
-    "shadcn/ui",
-  ],
-  openGraph: {
-    type: "website",
-    title: "Design. Develop. Automate. — Next.js Web Studio",
-    description:
-      "Design and build high-performance websites with Next.js. Full-service studio: UX, frontend, and automation.",
-    url: "/",
-    images: ["/images/hero-dashboar-sidebar.png"],
-    siteName: "ArkCabin",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Design. Develop. Automate. — Next.js Web Studio",
-    description:
-      "Design-led Next.js websites, UI components, and automation for modern teams.",
-    images: ["/images/hero-dashboar-sidebar.png"],
-    creator: "@arkcabin",
-  },
-};
+export const metadata: Metadata = getStaticPageMetadata("home");
 
 export default function Home() {
   const base = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000");

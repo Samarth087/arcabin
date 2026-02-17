@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -55,43 +56,78 @@ const FooterLayout = () => {
         {/* Company */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Company</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
-            <li className="hover:text-foreground transition">About</li>
-            <li className="hover:text-foreground transition">Approach</li>
-            <li className="hover:text-foreground transition">Work</li>
-            <li className="hover:text-foreground transition">Privacy Policy</li>
+          <ul className="space-y-2 text-foreground/80 text-sm">
+            <li>
+              <Link href="/about" className="hover:text-foreground transition">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/portfolio" className="hover:text-foreground transition">
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy-policy" className="hover:text-foreground transition">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="hover:text-foreground transition">
+                Terms
+              </Link>
+            </li>
           </ul>
         </div>
 
         {/* Services */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Services</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
-            <li className="hover:text-foreground transition">Crafted Websites</li>
-            <li className="hover:text-foreground transition">Website Redesign</li>
-            <li className="hover:text-foreground transition">eCommerce Design</li>
-            <li className="hover:text-foreground transition">CMS & Dynamic Sites</li>
+          <ul className="space-y-2 text-foreground/80 text-sm">
+            <li>
+              <Link href="/services" className="hover:text-foreground transition">
+                Services Overview
+              </Link>
+            </li>
+            <li className="text-foreground/40">App Development</li>
+            <li className="text-foreground/40">Web Development</li>
+            <li className="text-foreground/40">Custom Website Development</li>
+            <li className="text-foreground/40">WordPress Plugin Development</li>
+            <li className="text-foreground/40">API Development</li>
+            <li className="text-foreground/40">CRM & CPR Systems</li>
+            <li className="text-foreground/40">AI Automation</li>
+            <li className="text-foreground/40">SEO & Meta Ads</li>
           </ul>
         </div>
 
         {/* Resources */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Resources</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
-            <li className="hover:text-foreground transition">Blog</li>
-            <li className="hover:text-foreground transition">Templates</li>
-            <li className="hover:text-foreground transition">Process</li>
-            <li className="hover:text-foreground transition">FAQs</li>
+          <ul className="space-y-2 text-foreground/80 text-sm">
+            <li>
+              <Link href="/blog" className="hover:text-foreground transition">
+                Blog
+              </Link>
+            </li>
+            <li className="text-foreground/40 cursor-not-allowed">Templates</li>
+            <li className="text-foreground/40 cursor-not-allowed">Process</li>
           </ul>
         </div>
 
         {/* Contact */}
         <div className="border border-foreground/10 py-16 w-full px-6">
           <h4 className="text-sm mb-4 text-foreground/60">Contact</h4>
-          <ul className="space-y-2 text-foreground/80 text-sm cursor-pointer">
-            <li>Email: contact@arkcabin.com</li>
-            <li>Phone: +91 7000460610</li>
-            <li>WhatsApp</li>
+          <ul className="space-y-2 text-foreground/80 text-sm">
+            <li>
+              <a href="mailto:contact@arkcabin.com" className="hover:text-foreground transition">
+                contact@arkcabin.com
+              </a>
+            </li>
+            <li>
+              <a href="tel:+917000460610" className="hover:text-foreground transition">
+                +91 7000460610
+              </a>
+            </li>
             <li>India – Working globally</li>
           </ul>
         </div>
