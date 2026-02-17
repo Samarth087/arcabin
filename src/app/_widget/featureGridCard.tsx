@@ -1,7 +1,7 @@
 
 import GridCard from "@/components/ui/gridCard";
 import {
-    Earth,
+  Earth,
   Fence,
   Figma,
   Webhook,

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { features } from "@/constant/feature";
 import { TechGrid } from "../_widget/featureGridCard";
+import Link from "next/link";
 
 const FeatureGrid = () => {
   return (
@@ -12,10 +13,7 @@ const FeatureGrid = () => {
         </div>
 
         <div className="space-x-3">
-          <Button className="rounded-full">Start a project</Button>
-          <Button variant={"secondary"} className="rounded-full">
-            See our work
-          </Button>
+          <Button className="rounded-full" asChild><Link href="/services">View Services</Link></Button>
         </div>
       </div>
 
@@ -89,11 +87,11 @@ const FeatureGrid = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 flex justify-end">
+      {/* <div className="mx-auto max-w-7xl px-6 flex justify-end">
         <div>
           <TechGrid />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

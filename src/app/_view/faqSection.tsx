@@ -1,5 +1,6 @@
 "use client";
 
+import { v7 as uuidv7 } from "uuid";
 import {
   Accordion,
   AccordionContent,
@@ -8,40 +9,40 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 
-export default function FAQsSection() {
-  const faqItems = [
-    {
-      id: "item-1",
-      question: "How do I get started with ArkCabin?",
-      answer:
-        "Simply fill out the contact form, and we'll reach out through email or WhatsApp based on your preferred method of communication.",
-    },
-    {
-      id: "item-2",
-      question: "How involved do I need to be during the project?",
-      answer:
-        "You only need to share your content, preferences, and feedback at important stages. We handle the complete design, development, testing, and launch process.",
-    },
-    {
-      id: "item-3",
-      question: "How long does it take to build a website?",
-      answer:
-        "Most websites are completed within 2–6 weeks, depending on the number of pages, design direction, and required features.",
-    },
-    {
-      id: "item-4",
-      question: "Do you provide support after the website is launched?",
-      answer:
-        "Yes. We offer post-launch maintenance, content updates, and technical support to ensure your website continues to perform well.",
-    },
-    {
-      id: "item-5",
-      question: "Do you create responsive and eCommerce websites?",
-      answer:
-        "Absolutely. Every site we build is fully responsive, and we also develop complete eCommerce stores with payment integration and custom product layouts.",
-    },
-  ];
+const faqItems = [
+  {
+    id: uuidv7(),
+    question: "How do I get started with ArkCabin?",
+    answer:
+      "Simply fill out the contact form, and we'll reach out through email or WhatsApp based on your preferred method of communication.",
+  },
+  {
+    id: uuidv7(),
+    question: "How involved do I need to be during the project?",
+    answer:
+      "You only need to share your content, preferences, and feedback at important stages. We handle the complete design, development, testing, and launch process.",
+  },
+  {
+    id: uuidv7(),
+    question: "How long does it take to build a website?",
+    answer:
+      "Most websites are completed within 2–6 weeks, depending on the number of pages, design direction, and required features.",
+  },
+  {
+    id: uuidv7(),
+    question: "Do you provide support after the website is launched?",
+    answer:
+      "Yes. We offer post-launch maintenance, content updates, and technical support to ensure your website continues to perform well.",
+  },
+  {
+    id: uuidv7(),
+    question: "Do you create responsive and eCommerce websites?",
+    answer:
+      "Absolutely. Every site we build is fully responsive, and we also develop complete eCommerce stores with payment integration and custom product layouts.",
+  },
+];
 
+export default function FAQsSection() {
   return (
     <section className="pb-56 pt-32">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
@@ -58,6 +59,7 @@ export default function FAQsSection() {
 
         <div className="mx-auto mt-12 max-w-xl">
           <Accordion
+            id="faq-accordion"
             type="single"
             collapsible
             className="bg-card ring-muted w-full rounded-2xl border px-8 py-3 shadow-sm ring-4 dark:ring-0"
