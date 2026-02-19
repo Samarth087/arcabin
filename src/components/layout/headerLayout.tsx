@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -118,7 +117,6 @@ export const Header = () => {
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
                 <div className="flex items-center gap-2">
-                  <ModeToggle />
                   <Button
                     asChild
                     size="sm"
