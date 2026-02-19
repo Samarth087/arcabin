@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   { name: "Services", href: "/services" },
@@ -18,6 +19,7 @@ const menuItems = [
 export const Header = () => {
   const [menuState, setMenuState] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const pathname = usePathname();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -69,32 +71,48 @@ export const Header = () => {
 
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <ul className="flex gap-8 text-sm">
-                {menuItems.map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      href={item.href}
-                      className="text-muted-foreground hover:text-accent-foreground block duration-150"
-                    >
-                      <span>{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
+                {menuItems.map((item, index) => {
+                  const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
+                  return (
+                    <li key={index}>
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "block duration-150 transition-colors",
+                          isActive
+                            ? "text-foreground font-bold"
+                            : "text-muted-foreground hover:text-accent-foreground"
+                        )}
+                      >
+                        <span>{item.name}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
             <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
-                  {menuItems.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
-                      >
-                        <span>{item.name}</span>
-                      </Link>
-                    </li>
-                  ))}
+                  {menuItems.map((item, index) => {
+                    const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
+                    return (
+                      <li key={index}>
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            "block duration-150 transition-colors",
+                            isActive
+                              ? "text-foreground font-bold underline underline-offset-8"
+                              : "text-muted-foreground hover:text-accent-foreground"
+                          )}
+                        >
+                          <span>{item.name}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
 
               </div>
