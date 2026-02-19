@@ -10,7 +10,6 @@ interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
   squares?: Array<[x: number, y: number]>
   strokeDasharray?: string
   className?: string
-  id?: string
   [key: string]: unknown
 }
 
@@ -22,11 +21,9 @@ export function GridPattern({
   strokeDasharray = "0",
   squares,
   className,
-  id: propId,
   ...props
 }: GridPatternProps) {
-  const generatedId = useId()
-  const id = propId || generatedId
+  const id = useId()
 
   return (
     <svg

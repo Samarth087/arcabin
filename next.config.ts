@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "arkcabin.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatar.vercel.sh",
+        pathname: "/**",
+      },
     ],
   },
 };

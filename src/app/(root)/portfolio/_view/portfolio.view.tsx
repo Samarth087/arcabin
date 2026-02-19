@@ -161,11 +161,11 @@ export function PortfolioView() {
                         </motion.h2>
                     </div>
 
-                    <div className="mx-auto w-full max-w-6xl">
-                        <div className="overflow-hidden rounded-[3rem] border border-white/5 bg-white/[0.02] backdrop-blur-md">
-                            <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 md:grid-cols-3">
+                    <div className="mx-auto w-full max-w-5xl">
+                        <div className="overflow-hidden rounded-lg border">
+                            <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 md:grid-cols-3">
                                 {expertise.map((item, idx) => (
-                                    <FeatureCard feature={item} key={idx} className="bg-transparent hover:bg-white/[0.03] transition-colors duration-500" />
+                                    <FeatureCard feature={item} key={idx} />
                                 ))}
                             </div>
                         </div>

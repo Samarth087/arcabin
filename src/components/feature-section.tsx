@@ -44,6 +44,14 @@ export function FeatureCard({
 			className={cn("relative overflow-hidden bg-background p-8 md:p-10 transition-all duration-500 group", className)}
 			{...props}
 		>
+			<div className="mask-[radial-gradient(farthest-side_at_top,white,transparent)] pointer-events-none absolute top-0 left-1/2 -mt-2 -ml-20 size-full opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+				<GridPattern
+					className="absolute inset-0 size-full stroke-foreground/20"
+					height={40}
+					width={40}
+					x={20}
+				/>
+			</div>
 			{/* Professional Radial Highlight on Hover */}
 			<div className="absolute inset-0 bg-gradient-to-b from-white/[0.07] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 

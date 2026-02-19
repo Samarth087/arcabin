@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { getAllBlogPosts } from "@/content/blog/posts";
 import { getStaticPageMetadata } from "@/lib/seo";
+import BlogList from "./blog-list";
+import { fraunces } from "@/app/fonts";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = getStaticPageMetadata("blog");
 
@@ -10,40 +12,24 @@ export default function BlogPage() {
   const posts = getAllBlogPosts();
 
   return (
-    <section className="px-4 md:px-6 py-24">
-      <div className="mx-auto max-w-4xl">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">Blog</h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl">
-          A space for writing about interface design, component systems, and
-          practical patterns for shipping fast Next.js sites.
-        </p>
-
-        <div className="mt-10 space-y-6">
-          {posts.map((post) => (
-            <article key={post.slug} className="border-b pb-6 last:border-b-0">
-              <h2 className="text-xl md:text-2xl font-semibold">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="hover:underline"
-                >
-                  {post.title}
-                </Link>
-              </h2>
-              <p className="text-muted-foreground mt-2 text-sm">
-                {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "2-digit",
-                })}
-              </p>
-              <p className="text-muted-foreground mt-2 text-sm">
-                {post.description}
-              </p>
-            </article>
-          ))}
+    <section className="px-4 md:px-6 py-24 min-h-screen bg-background selection:bg-primary/10">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col gap-6 mb-20">
+          <h1 className={cn(
+            "text-4xl md:text-7xl lg:text-8xl font-black tracking-tight",
+            fraunces.className
+          )}>
+            The <span className="text-primary italic">Journal</span>
+          </h1>
+          <div className="h-1 w-24 bg-primary/20 rounded-full" />
+          <p className="text-muted-foreground text-xl md:text-2xl max-w-3xl leading-relaxed font-light">
+            An editorial space for digital excellence, exploring the intersection of
+            technology, design, and studio culture.
+          </p>
         </div>
+
+        <BlogList posts={posts} />
       </div>
     </section>
   );
 }
-
