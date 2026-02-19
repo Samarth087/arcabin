@@ -1,8 +1,9 @@
- "use client";
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +36,7 @@ export const Header = () => {
           className={cn(
             "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
+            "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-2 lg:gap-0 lg:py-3">
@@ -95,17 +96,20 @@ export const Header = () => {
                     </li>
                   ))}
                 </ul>
-              
+
               </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button
-                  asChild
-                  size="sm"
-                  variant={isScrolled ? "outline" : "default"}
-                  className="lg:inline-flex"
-                >
-                  <Link href="/contact">{isScrolled ? "Contact Us" : "Hire Us"}</Link>
-                </Button>
+              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
+                <div className="flex items-center gap-2">
+                  <ModeToggle />
+                  <Button
+                    asChild
+                    size="sm"
+                    variant={isScrolled ? "outline" : "default"}
+                    className="lg:inline-flex flex-1 sm:flex-none"
+                  >
+                    <Link href="/contact">{isScrolled ? "Contact Us" : "Hire Us"}</Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
