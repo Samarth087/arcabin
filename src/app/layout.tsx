@@ -7,6 +7,7 @@ import { roboto, fraunces } from "./fonts";
 import SmoothScrollProvider from "@/provider/smoothScrollProvider";
 import { Header } from "@/components/layout/headerLayout";
 import FooterLayout from "@/components/layout/footerLayout";
+import QueryProvider from "@/provider/query-provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -87,11 +88,13 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <SmoothScrollProvider>
-            <Header />
-            {children}
-            <FooterLayout />
-          </SmoothScrollProvider>
+          <QueryProvider>
+            <SmoothScrollProvider>
+              <Header />
+              {children}
+              <FooterLayout />
+            </SmoothScrollProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
