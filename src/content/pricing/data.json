@@ -1,0 +1,57 @@
+[
+    {
+        "id": "starter",
+        "name": "Standard",
+        "description": "Perfect for startups and simple landing pages.",
+        "prices": {
+            "INR": "₹24,999",
+            "USD": "$499"
+        },
+        "features": [
+            "Custom Design (1-2 Pages)",
+            "Mobile-First Optimization",
+            "Next.js Performance",
+            "SEO Fundamentals",
+            "Standard Support",
+            "Deployment Assistance"
+        ],
+        "highlight": false
+    },
+    {
+        "id": "studio",
+        "name": "Studio Pack",
+        "description": "Premium branding and full-featured business websites.",
+        "prices": {
+            "INR": "₹74,999",
+            "USD": "$999"
+        },
+        "features": [
+            "Full Branding & Identity",
+            "Custom UI/UX (Up to 8 Pages)",
+            "Dynamic Blog System",
+            "Advanced SEO & Analytics",
+            "Animations & Transitions",
+            "Priority Email Support"
+        ],
+        "highlight": true,
+        "popular": true
+    },
+    {
+        "id": "enterprise",
+        "name": "Enterprise",
+        "description": "Complex web apps and complete digital transformations.",
+        "prices": {
+            "INR": "₹1,99,999",
+            "USD": "$2,999"
+        },
+        "features": [
+            "Custom Web Applications",
+            "Complex Backend & DB Setup",
+            "Automated Workflows",
+            "Custom Integrations",
+            "Security Audits",
+            "24/7 Dedicated Support"
+        ],
+        "highlight": false
+    }
+]

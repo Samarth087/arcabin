@@ -182,7 +182,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="mt-20 pt-12 border-t border-border/50 flex flex-col items-center">
             <Link
               href="/blog"
-              className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-primary/5 text-primary border border-primary/10 font-bold text-[11px] uppercase tracking-[0.15em] transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-95 shadow-sm"
+              className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-primary/5 text-primary border border-primary/10 font-bold text-[11px] uppercase tracking-[0.15em] transition-all hover:bg-white/5 hover:border-primary hover:scale-[1.02] active:scale-95 shadow-sm"
             >
               <ArrowLeft className="size-3.5" />
               BROWSE MORE JOURNALS
