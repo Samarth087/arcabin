@@ -1,12 +1,14 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { ArrowLeft, ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { useProject } from "@/hooks/useProjects";
+import { fraunces } from "@/app/fonts";
 
 const menuItems = [
   { name: "Services", href: "/services" },
@@ -16,119 +18,149 @@ const menuItems = [
   { name: "About", href: "/about" },
 ];
 
+const NavContent = ({ mobile = false, pathname = "" }: { mobile?: boolean; pathname?: string }) => (
+  <ul className={cn("flex", mobile ? "flex-col space-y-6 text-base" : "gap-8 text-sm")}>
+    {menuItems.map((item) => {
+      const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
+      return (
+        <li key={item.href}>
+          <Link
+            href={item.href}
+            className={cn(
+              "block transition-all duration-150",
+              isActive
+                ? "text-foreground font-bold" + (mobile ? " underline underline-offset-8" : "")
+                : "text-muted-foreground hover:text-accent-foreground"
+            )}
+          >
+            <span>{item.name}</span>
+          </Link>
+        </li>
+      );
+    })}
+  </ul>
+);
+
 export const Header = () => {
-  const [menuState, setMenuState] = React.useState(false);
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+  const isProjectPage = pathname.startsWith('/portfolio/') && pathname !== '/portfolio';
+  const projectSlug = isProjectPage ? pathname.split('/').pop() : null;
+  const { data: project } = useProject(projectSlug || "");
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close menu on route change
+  useEffect(() => {
+    if (menuOpen) setMenuOpen(false);
+  }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <header>
-      <nav
-        data-state={menuState && "active"}
-        className="fixed z-20 w-full px-2"
-      >
+      <nav className="fixed z-50 w-full px-2">
         <div
           className={cn(
-            "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
-            isScrolled &&
-            "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
+            "mx-auto mt-4 max-w-7xl px-6 transition-all duration-500 lg:px-12",
+            isScrolled && "bg-background/80 max-w-5xl rounded-full border border-border/40 backdrop-blur-xl lg:px-6 shadow-sm",
+            isProjectPage && "max-w-[95%] lg:max-w-7xl"
           )}
         >
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-2 lg:gap-0 lg:py-3">
-            <div className="flex w-full justify-between lg:w-auto">
-              <Link
-                href="/"
-                aria-label="home"
-                className="flex items-center space-x-2"
-              >
-                <Image
-                  src="/images/ArkCabin-text-logo-updated.svg"
-                  alt="ArkCabin"
-                  width={150}
-                  height={40}
-                  priority
-                />
-              </Link>
+          <div className="relative flex items-center justify-between py-3">
 
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setMenuState(!menuState)}
-                  aria-label={menuState == true ? "Close Menu" : "Open Menu"}
-                  className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+            {/* Left side: Logo or Back Link */}
+            <div className="flex items-center gap-8">
+              {isProjectPage ? (
+                <Link
+                  href="/portfolio"
+                  className="group flex items-center gap-2 text-white/30 hover:text-white transition-colors duration-300 font-mono text-[10px] uppercase tracking-[0.2em] whitespace-nowrap"
                 >
-                  <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                  <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
-                </button>
-              </div>
+                  <ArrowLeft className="size-3.5 group-hover:-translate-x-1 transition-transform duration-300" />
+                  <span className="hidden sm:inline">Back to Portfolio</span>
+                  <span className="sm:hidden text-xs">Back</span>
+                </Link>
+              ) : (
+                <Link href="/" aria-label="home" className="flex items-center space-x-2 shrink-0">
+                  <Image
+                    src="/images/ArkCabin-text-logo-updated.svg"
+                    alt="ArkCabin"
+                    width={140}
+                    height={38}
+                    priority
+                    className="w-auto h-8 lg:h-9"
+                  />
+                </Link>
+              )}
             </div>
 
-            <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-              <ul className="flex gap-8 text-sm">
-                {menuItems.map((item, index) => {
-                  const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
-                  return (
-                    <li key={index}>
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "block duration-150 transition-colors",
-                          isActive
-                            ? "text-foreground font-bold"
-                            : "text-muted-foreground hover:text-accent-foreground"
-                        )}
-                      >
-                        <span>{item.name}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
-              <div className="lg:hidden">
-                <ul className="space-y-6 text-base">
-                  {menuItems.map((item, index) => {
-                    const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
-                    return (
-                      <li key={index}>
-                        <Link
-                          href={item.href}
-                          className={cn(
-                            "block duration-150 transition-colors",
-                            isActive
-                              ? "text-foreground font-bold underline underline-offset-8"
-                              : "text-muted-foreground hover:text-accent-foreground"
-                          )}
-                        >
-                          <span>{item.name}</span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-
-              </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
-                <div className="flex items-center gap-2">
-                  <ModeToggle />
-                  <Button
-                    asChild
-                    size="sm"
-                    variant={isScrolled ? "outline" : "default"}
-                    className="lg:inline-flex flex-1 sm:flex-none"
-                  >
-                    <Link href="/contact">{isScrolled ? "Contact Us" : "Hire Us"}</Link>
-                  </Button>
+            {/* Center: Logo (only on Project Page) or Nav */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center">
+              {isProjectPage ? (
+                <Link href="/" aria-label="home" className="flex items-center shrink-0">
+                  <Image
+                    src="/images/ArkCabin-text-logo-updated.svg"
+                    alt="ArkCabin"
+                    width={120}
+                    height={32}
+                    priority
+                    className="w-auto h-6 lg:h-7 opacity-80 hover:opacity-100 transition-opacity"
+                  />
+                </Link>
+              ) : (
+                <div className="hidden lg:block">
+                  <NavContent pathname={pathname} />
                 </div>
-              </div>
+              )}
+            </div>
+
+            {/* Right side: Breadcrumbs (Project Page) or Actions */}
+            <div className="flex items-center gap-4">
+              {isProjectPage && (
+                <div className="hidden xl:flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-white/20 font-black whitespace-nowrap mr-4">
+                  <span className="max-w-[100px] truncate">{projectSlug}</span>
+                  <ChevronRight className="size-3" />
+                  <span className={cn("text-primary truncate max-w-[150px]", fraunces.className)}>{project?.name || "..."}</span>
+                </div>
+              )}
+
+              <Button
+                asChild
+                size="sm"
+                variant={isScrolled ? "outline" : "default"}
+                className="hidden sm:inline-flex rounded-full px-5 h-9"
+              >
+                <Link href="/contact">{isScrolled ? "Contact" : "Hire Us"}</Link>
+              </Button>
+
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+                className="relative z-50 p-2 text-foreground lg:hidden focus:outline-none"
+              >
+                {menuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div
+          className={cn(
+            "fixed inset-0 z-40 bg-background/95 backdrop-blur-md transition-transform duration-300 transform lg:hidden",
+            menuOpen ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full p-8 pt-24">
+            <NavContent mobile pathname={pathname} />
+            <div className="mt-auto pt-8 flex flex-col gap-4">
+              <Button asChild size="lg" className="w-full rounded-2xl">
+                <Link href="/contact">Hire Us Today</Link>
+              </Button>
             </div>
           </div>
         </div>

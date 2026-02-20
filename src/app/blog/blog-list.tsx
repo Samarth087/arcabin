@@ -5,15 +5,17 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { Clock, ArrowRight } from "lucide-react";
 
-import { BlogPost } from "@/content/blog/posts";
+import { HygraphBlogPost } from "@/lib/hygraph";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { fraunces, roboto } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 
+import { useBlogPosts } from "@/hooks/useBlog";
+
 interface BlogListProps {
-    posts: BlogPost[];
+    posts?: HygraphBlogPost[];
 }
 
 const container = {
@@ -31,7 +33,9 @@ const item = {
     show: { opacity: 1, y: 0, transition: { type: "spring" as any, stiffness: 100, damping: 20 } },
 };
 
-export default function BlogList({ posts }: BlogListProps) {
+export default function BlogList({ posts: initialPosts }: BlogListProps) {
+    const { data: postsData } = useBlogPosts();
+    const posts = postsData || initialPosts || [];
     const [featuredPost, ...remainingPosts] = posts;
 
     // Simple estimate: 1 min per 10 words in description + 1 min overhead
@@ -54,7 +58,7 @@ export default function BlogList({ posts }: BlogListProps) {
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                                 <div className="lg:col-span-7 relative aspect-[16/9] lg:aspect-[4/3] overflow-hidden rounded-3xl">
                                     <Image
-                                        src={featuredPost.image}
+                                        src={featuredPost.coverImage.url}
                                         alt={featuredPost.title}
                                         fill
                                         priority
@@ -71,7 +75,7 @@ export default function BlogList({ posts }: BlogListProps) {
                                         </Badge>
                                         <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium uppercase tracking-widest">
                                             <Clock className="size-3 text-primary/60" />
-                                            <span>{getReadingTime(featuredPost.description)} min read</span>
+                                            <span>{getReadingTime(featuredPost.excerpt)} min read</span>
                                         </div>
                                     </div>
 
@@ -86,16 +90,16 @@ export default function BlogList({ posts }: BlogListProps) {
                                         "text-muted-foreground text-lg leading-relaxed line-clamp-4",
                                         roboto.className
                                     )}>
-                                        {featuredPost.description}
+                                        {featuredPost.excerpt}
                                     </p>
 
                                     <div className="flex items-center gap-4 mt-2">
                                         <Avatar className="size-10 ring-2 ring-background border border-border">
-                                            <AvatarImage src={`https://avatar.vercel.sh/${featuredPost.author}`} />
-                                            <AvatarFallback>{featuredPost.author[0]}</AvatarFallback>
+                                            <AvatarImage src={`https://avatar.vercel.sh/ArkCabin`} />
+                                            <AvatarFallback>A</AvatarFallback>
                                         </Avatar>
                                         <div className="flex flex-col">
-                                            <span className="text-sm font-bold tracking-tight">{featuredPost.author}</span>
+                                            <span className="text-sm font-bold tracking-tight">ArkCabin</span>
                                             <span className="text-xs text-muted-foreground">
                                                 {new Date(featuredPost.publishedAt).toLocaleDateString("en-US", {
                                                     month: "long",
@@ -131,7 +135,7 @@ export default function BlogList({ posts }: BlogListProps) {
                                 <div className="flex flex-col gap-6">
                                     <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                                         <Image
-                                            src={post.image}
+                                            src={post.coverImage.url}
                                             alt={post.title}
                                             fill
                                             sizes="(max-width: 768px) 100vw, 45vw"
@@ -142,16 +146,9 @@ export default function BlogList({ posts }: BlogListProps) {
 
                                     <div className="flex flex-col gap-4">
                                         <div className="flex items-center justify-between">
-                                            <div className="flex flex-wrap gap-2">
-                                                {post.tags?.map((tag) => (
-                                                    <span key={tag} className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
                                             <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
                                                 <Clock className="size-2.5" />
-                                                <span>{getReadingTime(post.description)} min read</span>
+                                                <span>{getReadingTime(post.excerpt)} min read</span>
                                             </div>
                                         </div>
 
@@ -166,16 +163,16 @@ export default function BlogList({ posts }: BlogListProps) {
                                             "text-muted-foreground text-sm leading-relaxed line-clamp-3",
                                             roboto.className
                                         )}>
-                                            {post.description}
+                                            {post.excerpt}
                                         </p>
 
                                         <div className="flex items-center gap-3 pt-2">
                                             <Avatar className="size-7 border border-border">
-                                                <AvatarImage src={`https://avatar.vercel.sh/${post.author}`} />
-                                                <AvatarFallback>{post.author[0]}</AvatarFallback>
+                                                <AvatarImage src={`https://avatar.vercel.sh/ArkCabin`} />
+                                                <AvatarFallback>A</AvatarFallback>
                                             </Avatar>
                                             <div className="flex flex-col">
-                                                <span className="text-xs font-bold">{post.author}</span>
+                                                <span className="text-xs font-bold">ArkCabin</span>
                                                 <span className="text-[10px] text-muted-foreground">
                                                     {new Date(post.publishedAt).toLocaleDateString("en-US", {
                                                         month: "short",

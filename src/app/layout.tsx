@@ -7,6 +7,8 @@ import { roboto, fraunces } from "./fonts";
 import SmoothScrollProvider from "@/provider/smoothScrollProvider";
 import { Header } from "@/components/layout/headerLayout";
 import FooterLayout from "@/components/layout/footerLayout";
+import QueryProvider from "@/provider/query-provider";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -83,15 +85,28 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
 
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
-          <SmoothScrollProvider>
-            <Header />
-            {children}
-            <FooterLayout />
-          </SmoothScrollProvider>
+          <QueryProvider>
+            <NextTopLoader
+              color="#0033ff"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={1}
+              crawl={true}
+              showSpinner={false}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #0033ff,0 0 5px #0033ff"
+            />
+            <SmoothScrollProvider>
+              <Header />
+              {children}
+              <FooterLayout />
+            </SmoothScrollProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
