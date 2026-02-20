@@ -162,7 +162,7 @@ const HeroView = () => {
                     className="rounded-xl px-5 text-base"
                   >
                     <Link href="/contact">
-                      <span className="text-nowrap">Hire Us</span>
+                      <span className="text-nowrap">Contact us</span>
                     </Link>
                   </Button>
                 </div>
@@ -202,19 +202,19 @@ const HeroView = () => {
                     <div className="flex-1 min-h-0">
                       {/* Explorer */}
                       <div className="flex h-full">
-                      <VscodeExplorer tree={vscodeTree} />
-                      <div className="flex flex-1 min-w-0">
-                        {/* Left: Code */}
-                        <div className="w-3/5 border-r border-white/10">
-                          <HeroCodePanel />
-                        </div>
+                        <VscodeExplorer tree={vscodeTree} />
+                        <div className="flex flex-1 min-w-0">
+                          {/* Left: Code */}
+                          <div className="w-3/5 border-r border-white/10">
+                            <HeroCodePanel />
+                          </div>
 
-                        {/* Right: Cards */}
-                        <div className="w-2/5 h-full" id="hero-cards-column">
-                          <HeroCardsGrid />
+                          {/* Right: Cards */}
+                          <div className="w-2/5 h-full" id="hero-cards-column">
+                            <HeroCardsGrid />
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </div>
                   </div>
                 </div>

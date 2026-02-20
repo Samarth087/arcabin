@@ -5,7 +5,7 @@ import { QUERY_KEYS } from "@/lib/query-keys";
 
 export const GET_BLOG_POSTS_QUERY = gql`
   query GetBlogPosts {
-    blogPosts(orderBy: publishedAt_DESC) {
+    blogPosts(orderBy: updatedAt_DESC) {
       id
       title
       slug

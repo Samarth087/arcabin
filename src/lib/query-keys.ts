@@ -7,4 +7,8 @@ export const QUERY_KEYS = {
     all: ['projects'] as const,
     detail: (slug: string) => ['project', slug] as const,
   },
+  sections: {
+    all: ['sections'] as const,
+    byTitle: (title: string) => ['sections', 'byTitle', title] as const,
+  },
 } as const;

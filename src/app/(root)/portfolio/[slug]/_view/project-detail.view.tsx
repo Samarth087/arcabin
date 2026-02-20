@@ -19,15 +19,15 @@ interface ProjectDetailViewProps {
 }
 
 export function ProjectDetailView({ project: initialProject }: ProjectDetailViewProps) {
-    const { data: project } = useProject(initialProject.slug);
-    const data = project || initialProject;
+    const { data: projectData } = useProject(initialProject.slug);
+    const data = projectData || initialProject;
     return (
         <main className="bg-background selection:bg-primary/10 min-h-screen pb-32">
             {/* Hero Section */}
             <section className="relative w-full aspect-[21/9] md:aspect-[24/10] overflow-hidden">
                 <Image
-                    src={project.thumbnail.url}
-                    alt={project.name}
+                    src={data.thumbnail?.url || ""}
+                    alt={data.name}
                     fill
                     priority
                     className="object-cover opacity-60"
@@ -42,7 +42,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                             transition={{ duration: 0.8 }}
                         >
                             <div className="flex flex-wrap gap-3 mb-6">
-                                {project.tags.map((tag: string, i: number) => (
+                                {data.tags.map((tag: string, i: number) => (
                                     <Badge key={i} variant="outline" className="px-4 py-1.5 rounded-full border-primary/20 bg-primary/5 text-primary text-[10px] uppercase font-black tracking-widest">
                                         {tag}
                                     </Badge>
@@ -52,7 +52,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                                 "text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter text-white leading-[0.85] mb-8",
                                 fraunces.className
                             )}>
-                                {project.name}
+                                {data.name}
                             </h1>
                         </motion.div>
                     </div>
@@ -74,7 +74,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                                 The <span className="text-primary italic">Overview</span>
                             </h2>
                             <p className={cn("text-xl md:text-2xl text-white/70 leading-relaxed font-light mb-12", roboto.className)}>
-                                {project.shortDescription}
+                                {data.shortDescription}
                             </p>
 
                             <div
@@ -83,13 +83,13 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                                     roboto.className
                                 )}
                                 dangerouslySetInnerHTML={{
-                                    __html: (typeof project.description === 'string' ? project.description : (project.description?.html || project.description?.text || ""))
+                                    __html: (typeof data.description === 'string' ? data.description : (data.description?.html || data.description?.text || ""))
                                 }}
                             />
                         </motion.div>
 
                         {/* Gallery Grid */}
-                        {project.gallery && project.gallery.length > 0 && (
+                        {data.gallery && data.gallery.length > 0 && (
                             <motion.div
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                                     Project <span className="text-primary italic">Gallery</span>
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {project.gallery.map((image: { url: string }, i: number) => (
+                                    {data.gallery.map((image: { url: string }, i: number) => (
                                         <div
                                             key={i}
                                             className={cn(
@@ -111,7 +111,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                                         >
                                             <Image
                                                 src={image.url}
-                                                alt={`${project.name} gallery ${i + 1}`}
+                                                alt={`${data.name} gallery ${i + 1}`}
                                                 fill
                                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
@@ -159,7 +159,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                             <div className="px-4">
                                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6">Tags</h4>
                                 <div className="flex flex-wrap gap-2">
-                                    {project.tags.map((tag: string, i: number) => (
+                                    {data.tags.map((tag: string, i: number) => (
                                         <span key={i} className="text-[10px] font-mono tracking-widest uppercase text-white/40 border border-white/5 bg-white/[0.02] px-3 py-1.5 rounded-full">
                                             {tag}
                                         </span>

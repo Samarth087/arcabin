@@ -24,49 +24,49 @@ import { processSteps } from "@/constant/workflow";
 
 const services = [
   {
-    title: "App Development",
-    description: "Native and cross-platform mobile apps built for performance and scale.",
-    icon: <Smartphone />,
-  },
-  {
-    title: "Web Development",
-    description: "Production-ready Next.js applications with modern architecture.",
+    title: "SaaS Development",
+    description: "End-to-end SaaS engineering for startups, from MVP architecture to scalable production systems.",
     icon: <Globe />,
   },
   {
-    title: "Custom Website Development",
-    description: "Tailored websites that perfectly match your brand identity and business goals.",
+    title: "Custom Web Applications",
+    description: "High-performance software solutions and complex web platforms built with modern tech stacks.",
     icon: <Code />,
   },
   {
-    title: "WordPress Plugin Development",
-    description: "Custom plugins to extend your WordPress functionality beyond the basics.",
-    icon: <Database />,
-  },
-  {
-    title: "API Development",
-    description: "Robust, secure, and scalable APIs to power your digital ecosystem.",
-    icon: <Zap />,
-  },
-  {
-    title: "CRM & CPR Systems",
-    description: "Custom Customer Relationship Management tools streamlined for your workflow.",
-    icon: <Users />,
-  },
-  {
-    title: "AI Automation",
-    description: "Intelligent workflows and bots to automate repetitive tasks and save time.",
+    title: "AI Automation & Workflows",
+    description: "Intelligent agentic workflows and AI-driven systems to automate complex business processes.",
     icon: <Bot />,
   },
   {
-    title: "SEO & Meta Ads",
-    description: "Data-driven strategies to increase visibility and convert traffic.",
-    icon: <TrendingUp />,
+    title: "Startup MVP Lab",
+    description: "Rapid development of minimum viable products to validate your vision and attract investors.",
+    icon: <Zap />,
   },
   {
-    title: "3D Animation & WebGL",
-    description: "Immersive 3D experiences, interactive models, and motion graphics for the web.",
+    title: "Advanced Motion & WebGL",
+    description: "Immersive 3D experiences, premium animations, and interactive motion graphics for the web.",
     icon: <Cuboid />,
+  },
+  {
+    title: "Enterprise API Design",
+    description: "Robust, secure, and highly scalable API ecosystems to power your digital infrastructure.",
+    icon: <Database />,
+  },
+  {
+    title: "Specialized WordPress",
+    description: "Beyond basic themes—custom plugins and headless WordPress architectures for performance.",
+    icon: <Code />,
+  },
+  {
+    title: "CRM & Product Systems",
+    description: "Custom-built internal tools and management systems tailored to your unique business needs.",
+    icon: <Users />,
+  },
+  {
+    title: "Growth SEO & Meta Ads",
+    description: "Strategic search engine optimization and data-driven ad campaigns to scale your digital reach.",
+    icon: <TrendingUp />,
   },
 ];
 

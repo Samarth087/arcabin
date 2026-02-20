@@ -18,9 +18,9 @@ import { CTASection } from "@/components/cta-section";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 
 type BlogPostPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 // Removed GET_BLOG_POSTS_SLUGS and GET_BLOG_POST_QUERY as they are either inlined or imported
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata | undefined> {
-  const { slug } = params; // params is not a Promise here
+  const { slug } = await params;
   const data = await hygraph.request<{ blogPost: HygraphBlogPost }>(GET_BLOG_POST_QUERY, { slug });
   const post = data.blogPost;
 
@@ -46,14 +46,14 @@ export async function generateMetadata({
   return createArticleMetadata({
     slug: post.slug,
     basePath: "/blog",
-    title: post.seoTitle || post.title,
-    description: post.seoDescription || post.excerpt,
-    image: post.coverImage.url,
+    title: post?.seoTitle || post.title,
+    description: post?.seoDescription || post.excerpt,
+    image: post?.coverImage?.url || "",
   });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = params; // params is not a Promise here
+  const { slug } = await params;
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
@@ -145,15 +145,17 @@ async function BlogPostView({ slug }: { slug: string }) {
 
       {/* Article Body */}
       <div className="mx-auto max-w-4xl px-4 md:px-6 py-16 md:py-24">
-        <div className="relative aspect-video mb-16 overflow-hidden rounded-3xl shadow-2xl border border-white/10">
-          <Image
-            src={post.coverImage.url}
-            alt={post.title}
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
+        {post.coverImage?.url && (
+          <div className="relative aspect-video mb-16 overflow-hidden rounded-3xl shadow-2xl border border-white/10">
+            <Image
+              src={post.coverImage.url}
+              alt={post.title}
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+        )}
 
         <article className="mx-auto max-w-2xl">
           <p className={cn(
@@ -164,7 +166,7 @@ async function BlogPostView({ slug }: { slug: string }) {
           </p>
 
           <div className="max-w-none text-foreground leading-relaxed">
-            <RichText
+            {post.content?.raw && <RichText
               content={post.content.raw}
               renderers={{
                 h1: ({ children }) => (
@@ -244,7 +246,7 @@ async function BlogPostView({ slug }: { slug: string }) {
                 bold: ({ children }) => <strong className="font-bold text-white">{children}</strong>,
                 italic: ({ children }) => <em className="italic text-white/90">{children}</em>,
               }}
-            />
+            />}
           </div>
         </article>
 

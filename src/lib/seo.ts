@@ -30,72 +30,74 @@ type StaticPageKey =
 const defaultBaseUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://arkcabin.com";
 
-const siteName = "ArkCabin";
+const siteName = "ArkCabin IT Services Pvt Ltd";
 
 const staticPages: Record<StaticPageKey, PageMetadataInput> = {
   home: {
     path: "/",
-    title: "Design. Develop. Automate. — Next.js Web Studio",
+    title: "ArkCabin — SaaS Development, AI Automation & Startup Product Studio",
     description:
-      "ArkCabin is a design-led Next.js agency delivering websites, apps, and AI automation. Hire us for UX, frontend engineering, and performance.",
+      "ArkCabin builds high-growth SaaS products, custom web apps, and intelligent AI automation for startups. We specialize in Next.js, motion design, and high-performance software engineering.",
     image: "/images/hero-dashboar-sidebar.png",
     keywords: [
-      "Web Design Agency",
-      "Next.js Development",
-      "Frontend Engineering",
-      "UX Design",
-      "AI Automation",
-      "TailwindCSS",
-      "shadcn/ui",
+      "SaaS Development Agency",
+      "Next.js Startup Studio",
+      "AI Automation for Business",
+      "Custom Software Development",
+      "MVP Development for Startups",
+      "Web App Engineering",
+      "High-End Web Animations",
+      "Specialized WordPress Solutions",
+      "Next.js Performance Optimization",
     ],
   },
   about: {
     path: "/about",
-    title: "About ArkCabin",
+    title: "About ArkCabin — Engineering Digital Excellence",
     description:
-      "Learn about ArkCabin, a design-led Next.js studio focused on fast, crafted web experiences.",
+      "A specialized team of engineers and designers dedicated to building the next generation of SaaS and digital products. Learn about our process and mission.",
   },
   services: {
     path: "/services",
-    title: "Services",
+    title: "Services — SaaS, Custom Apps & AI Automation | ArkCabin",
     description:
-      "Explore ArkCabin services: design, Next.js development, frontend engineering, and automation.",
+      "From MVP development to enterprise AI automation. Specializing in high-performance Next.js apps, SaaS architecture, premium WordPress, and motion design.",
   },
   portfolio: {
     path: "/portfolio",
-    title: "Portfolio",
+    title: "Portfolio — SaaS Products & Custom Solutions | ArkCabin",
     description:
-      "Selected ArkCabin projects and case studies showcasing web design and Next.js implementation.",
+      "Showcasing high-impact SaaS platforms, automated systems, and performance-first web applications built for startups and global brands.",
   },
   pricing: {
     path: "/pricing",
-    title: "Pricing",
+    title: "Transparent SaaS & Web Development Pricing | ArkCabin",
     description:
-      "Transparent pricing for ArkCabin web design, Next.js development, and ongoing support.",
+      "Fair and flexible pricing for startup MVPs, custom software, and specialized web engineering services.",
   },
   blog: {
     path: "/blog",
-    title: "Blog",
+    title: "Insights on SaaS, AI & Software Engineering | ArkCabin Blog",
     description:
-      "Articles and notes from ArkCabin on design, engineering, and building with Next.js.",
+      "Technical deep-dives and industry insights on building modern SaaS, integrating AI, and mastering frontend performance.",
   },
   contact: {
     path: "/contact",
-    title: "Contact Us",
+    title: "Let's Build Your Vision — Contact ArkCabin",
     description:
-      "Get in touch with ArkCabin for projects, support, or inquiries.",
+      "Partner with ArkCabin for your next SaaS project, AI integration, or high-performance web application. Get started today.",
   },
   privacy: {
     path: "/privacy-policy",
-    title: "Privacy Policy",
+    title: "Privacy Policy | ArkCabin",
     description:
-      "How ArkCabin handles analytics, contact information, and other data on this site.",
+      "Transparent information on how we handle data and respect your privacy.",
   },
   terms: {
     path: "/terms",
-    title: "Terms of Service",
+    title: "Terms of Service | ArkCabin",
     description:
-      "The basic terms of using the ArkCabin website and any related services.",
+      "The terms and conditions governing our digital products and consulting services.",
   },
 };
 

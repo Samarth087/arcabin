@@ -1,54 +1,88 @@
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
-import type { BentoCardProps } from "@/components/ui/bento-grid";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface StackCardProps {
   title: string;
   description: string;
   index: number;
-  data: BentoCardProps[];
+  thumbnail?: string;
+  gallery?: { url: string }[];
   tags?: string[];
   location?: string;
   cta?: string;
-  /* New prop */
+  url?: string;
   feature?: { label: string; value: string };
 }
+
+const gridSpans = [
+  "md:col-span-1 md:row-span-2 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
+  "md:col-span-1 md:row-span-1 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+  "md:col-span-1 md:row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
+  "md:col-span-2 md:row-span-1 lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
+  "md:col-span-1 md:row-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
+  "md:col-span-1 md:row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
+];
 
 export const StackCard = ({
   title,
   description,
   index,
-  data,
+  thumbnail,
+  gallery = [],
   tags = [],
   location,
   cta = "View Project",
+  url,
   feature,
 }: StackCardProps) => {
+  const hasGallery = gallery && gallery.length > 0;
+
   return (
     <div
       className="
         stack-card
         absolute inset-0
-        flex items-center
+        flex items-start
         will-change-transform
-        border-t border-border
       "
       data-index={index}
     >
-      <div className="w-screen max-w-screen h-screen mx-auto px-4 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-10 bg-background pt-24">
-        {/* LEFT COLUMN — BENTO */}
+      <div className="w-screen max-w-screen h-screen mx-auto px-4 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-10 bg-background pt-24 pointer-events-auto">
+        {/* LEFT COLUMN — BENTO or SINGLE IMAGE */}
         <div
           className={cn(
             "relative bg-card p-4 md:p-5 rounded-3xl h-[60vh] md:h-[85vh] overflow-hidden shadow-2xl",
             index % 2 === 1 ? "md:order-2" : "md:order-1",
           )}
         >
-          <BentoGrid className="grid-rows-3 h-full gap-3 md:gap-4">
-            {/* You will pass dynamic cards here */}
-            {data.map((item, idx) => (
-              <BentoCard key={idx} {...item} />
-            ))}
-          </BentoGrid>
+          {hasGallery ? (
+            <BentoGrid className="grid-rows-3 h-full gap-3 md:gap-4">
+              {gallery.slice(0, 6).map((item, idx) => (
+                <BentoCard
+                  key={idx}
+                  className={gridSpans[idx]}
+                  background={
+                    <Image
+                      src={item.url}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  }
+                />
+              ))}
+            </BentoGrid>
+          ) : (
+            <div className="relative w-full h-full overflow-hidden rounded-2xl">
+              <Image
+                src={thumbnail || "/images/portfolio-1.png"}
+                alt={title}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
         </div>
 
         {/* RIGHT COLUMN — CONTENT */}
@@ -106,7 +140,12 @@ export const StackCard = ({
 
             {/* CTA Button */}
             <div className="pt-8 border-t border-background/10">
-              <button className="group relative overflow-hidden rounded-full bg-white text-black px-8 py-3 font-medium transition-all hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black">
+              <a
+                href={url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-block overflow-hidden rounded-full bg-white text-black px-8 py-3 font-medium transition-all hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black"
+              >
                 <span className="relative z-10 flex items-center gap-2">
                   {cta}
                   <svg
@@ -124,7 +163,7 @@ export const StackCard = ({
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
