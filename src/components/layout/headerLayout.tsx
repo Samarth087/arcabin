@@ -134,7 +134,7 @@ export const Header = () => {
                 variant={isScrolled ? "outline" : "default"}
                 className="hidden sm:inline-flex rounded-full px-5 h-9"
               >
-                <Link href="/contact">{isScrolled ? "Contact" : "Hire Us"}</Link>
+                <Link href="/contact">{isScrolled ? "Get in touch" : "Contact us"}</Link>
               </Button>
 
               <button
@@ -159,7 +159,7 @@ export const Header = () => {
             <NavContent mobile pathname={pathname} />
             <div className="mt-auto pt-8 flex flex-col gap-4">
               <Button asChild size="lg" className="w-full rounded-2xl">
-                <Link href="/contact">Hire Us Today</Link>
+                <Link href="/contact">Contact us today</Link>
               </Button>
             </div>
           </div>

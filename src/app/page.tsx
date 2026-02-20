@@ -10,7 +10,7 @@ export default function Home() {
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ArkCabin",
+    name: "ArkCabin IT Services Pvt Ltd",
     url: base,
     logo: "/images/ArkCabin-logo.svg",
     sameAs: [
@@ -20,7 +20,7 @@ export default function Home() {
   const webSiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "ArkCabin",
+    name: "ArkCabin IT Services Pvt Ltd",
     url: base,
     potentialAction: {
       "@type": "SearchAction",
@@ -31,15 +31,15 @@ export default function Home() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "ArkCabin — Next.js Web Studio",
+    name: "ArkCabin — SaaS & Startup Product Studio",
     url: base,
     areaServed: "Global",
     serviceType: [
-      "Web Design",
-      "Next.js Development",
-      "Frontend Engineering",
-      "UX Design",
-      "AI Automation"
+      "SaaS Development",
+      "Startup MVP Development",
+      "Custom Software Application",
+      "AI Automation & Workflows",
+      "Advanced Web Motion Design"
     ],
     offers: {
       "@type": "Offer",
