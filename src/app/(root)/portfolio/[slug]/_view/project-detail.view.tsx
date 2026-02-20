@@ -153,7 +153,7 @@ export function ProjectDetailView({ project }: ProjectDetailViewProps) {
 
                             {/* Tags Cloud */}
                             <div className="px-4">
-                                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6">Technologies Used</h4>
+                                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6">Tags</h4>
                                 <div className="flex flex-wrap gap-2">
                                     {project.tags.map((tag, i) => (
                                         <span key={i} className="text-[10px] font-mono tracking-widest uppercase text-white/40 border border-white/5 bg-white/[0.02] px-3 py-1.5 rounded-full">
