@@ -76,7 +76,7 @@ export function CTASection() {
           >
             <Button
               size="lg"
-              className="rounded-full px-8 h-12 font-bold text-[11px] uppercase tracking-[0.15em] bg-primary text-primary-foreground hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 w-full sm:w-auto"
+              className="rounded-full px-8 h-12 font-bold text-[11px] uppercase tracking-[0.15em] bg-white text-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-white/5 w-full sm:w-auto"
               asChild
             >
               <Link href="/contact" className="flex items-center justify-center gap-2 w-full">
