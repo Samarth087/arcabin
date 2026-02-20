@@ -5,7 +5,7 @@ import { QUERY_KEYS } from "@/lib/query-keys";
 
 export const PROJECTS_QUERY = gql`
   query GetProjects {
-    projects {
+    projects(orderBy: updatedAt_DESC) {
       id
       name
       shortDescription
@@ -24,6 +24,8 @@ export const PROJECTS_QUERY = gql`
       }
       seoTitle
       seoDescription
+      url
+      isFeatured
     }
   }
 `

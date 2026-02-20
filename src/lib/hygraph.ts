@@ -34,6 +34,8 @@ export interface HygraphProject {
   }[];
   seoTitle?: string;
   seoDescription?: string;
+  url?: string;
+  isFeatured?: boolean;
 }
 
 export interface HygraphBlogPost {
@@ -63,4 +65,21 @@ export interface ProjectsResponse {
 
 export interface BlogPostsResponse {
   blogPosts: HygraphBlogPost[];
+}
+
+export interface HygraphSection {
+  id: string;
+  name: string;
+  type?: string;
+  content?: string;
+  image: {
+    url: string;
+  }[];
+  backgroundImage?: {
+    url: string;
+  };
+}
+
+export interface SectionsResponse {
+  sections: HygraphSection[];
 }
