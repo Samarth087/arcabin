@@ -18,9 +18,9 @@ import { CTASection } from "@/components/cta-section";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 
 type BlogPostPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 // Removed GET_BLOG_POSTS_SLUGS and GET_BLOG_POST_QUERY as they are either inlined or imported
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata | undefined> {
-  const { slug } = params; // params is not a Promise here
+  const { slug } = await params;
   const data = await hygraph.request<{ blogPost: HygraphBlogPost }>(GET_BLOG_POST_QUERY, { slug });
   const post = data.blogPost;
 
@@ -53,7 +53,7 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = params; // params is not a Promise here
+  const { slug } = await params;
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
