@@ -46,9 +46,9 @@ export async function generateMetadata({
   return createArticleMetadata({
     slug: post.slug,
     basePath: "/blog",
-    title: post.seoTitle || post.title,
-    description: post.seoDescription || post.excerpt,
-    image: post.coverImage.url,
+    title: post?.seoTitle || post.title,
+    description: post?.seoDescription || post.excerpt,
+    image: post?.coverImage?.url || "",
   });
 }
 
@@ -145,15 +145,17 @@ async function BlogPostView({ slug }: { slug: string }) {
 
       {/* Article Body */}
       <div className="mx-auto max-w-4xl px-4 md:px-6 py-16 md:py-24">
-        <div className="relative aspect-video mb-16 overflow-hidden rounded-3xl shadow-2xl border border-white/10">
-          <Image
-            src={post.coverImage.url}
-            alt={post.title}
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
+        {post.coverImage?.url && (
+          <div className="relative aspect-video mb-16 overflow-hidden rounded-3xl shadow-2xl border border-white/10">
+            <Image
+              src={post.coverImage.url}
+              alt={post.title}
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+        )}
 
         <article className="mx-auto max-w-2xl">
           <p className={cn(
@@ -164,7 +166,7 @@ async function BlogPostView({ slug }: { slug: string }) {
           </p>
 
           <div className="max-w-none text-foreground leading-relaxed">
-            <RichText
+            {post.content?.raw && <RichText
               content={post.content.raw}
               renderers={{
                 h1: ({ children }) => (
@@ -244,7 +246,7 @@ async function BlogPostView({ slug }: { slug: string }) {
                 bold: ({ children }) => <strong className="font-bold text-white">{children}</strong>,
                 italic: ({ children }) => <em className="italic text-white/90">{children}</em>,
               }}
-            />
+            />}
           </div>
         </article>
 

@@ -130,7 +130,7 @@ const PortfolioSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-background"
+      className="relative min-h-screen overflow-hidden bg-background"
     >
       <div className="absolute inset-0 z-1 flex items-center overflow-hidden pointer-events-none">
         <Marquee

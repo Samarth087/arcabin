@@ -3,6 +3,8 @@ import { getStaticPageUrl } from "@/lib/seo";
 import { hygraph } from "@/lib/hygraph";
 import { gql } from "graphql-request";
 
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://arkcabin.com").replace(/\/$/, "");
+
 const DYNAMIC_PATHS_QUERY = gql`
   query GetDynamicPaths {
     projects {
@@ -90,14 +92,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const projectPaths: MetadataRoute.Sitemap = dynamicPaths.projects.map((p) => ({
-    url: `${getStaticPageUrl("home")}portfolio/${p.slug}`,
+    url: `${BASE_URL}/portfolio/${p.slug}`,
     lastModified: new Date(p.updatedAt),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
   const blogPaths: MetadataRoute.Sitemap = dynamicPaths.blogPosts.map((b) => ({
-    url: `${getStaticPageUrl("home")}blog/${b.slug}`,
+    url: `${BASE_URL}/blog/${b.slug}`,
     lastModified: new Date(b.updatedAt),
     changeFrequency: "monthly",
     priority: 0.5,

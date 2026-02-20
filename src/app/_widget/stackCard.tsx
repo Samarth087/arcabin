@@ -43,13 +43,12 @@ export const StackCard = ({
       className="
         stack-card
         absolute inset-0
-        flex items-center
+        flex items-start
         will-change-transform
-        border-t border-border
       "
       data-index={index}
     >
-      <div className="w-screen max-w-screen h-screen mx-auto px-4 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-10 bg-background pt-24">
+      <div className="w-screen max-w-screen h-screen mx-auto px-4 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-10 bg-background pt-24 pointer-events-auto">
         {/* LEFT COLUMN — BENTO or SINGLE IMAGE */}
         <div
           className={cn(
