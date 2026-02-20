@@ -12,11 +12,15 @@ import { Button } from "@/components/ui/button";
 import { IntegrationsSection } from "@/components/integrations-section";
 import { CTASection } from "@/components/cta-section";
 
+import { useProject } from "@/hooks/useProjects";
+
 interface ProjectDetailViewProps {
     project: HygraphProject;
 }
 
-export function ProjectDetailView({ project }: ProjectDetailViewProps) {
+export function ProjectDetailView({ project: initialProject }: ProjectDetailViewProps) {
+    const { data: project } = useProject(initialProject.slug);
+    const data = project || initialProject;
     return (
         <main className="bg-background selection:bg-primary/10 min-h-screen pb-32">
             {/* Hero Section */}
@@ -38,7 +42,7 @@ export function ProjectDetailView({ project }: ProjectDetailViewProps) {
                             transition={{ duration: 0.8 }}
                         >
                             <div className="flex flex-wrap gap-3 mb-6">
-                                {project.tags.map((tag, i) => (
+                                {project.tags.map((tag: string, i: number) => (
                                     <Badge key={i} variant="outline" className="px-4 py-1.5 rounded-full border-primary/20 bg-primary/5 text-primary text-[10px] uppercase font-black tracking-widest">
                                         {tag}
                                     </Badge>
@@ -97,7 +101,7 @@ export function ProjectDetailView({ project }: ProjectDetailViewProps) {
                                     Project <span className="text-primary italic">Gallery</span>
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {project.gallery.map((image, i) => (
+                                    {project.gallery.map((image: { url: string }, i: number) => (
                                         <div
                                             key={i}
                                             className={cn(
@@ -155,7 +159,7 @@ export function ProjectDetailView({ project }: ProjectDetailViewProps) {
                             <div className="px-4">
                                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6">Tags</h4>
                                 <div className="flex flex-wrap gap-2">
-                                    {project.tags.map((tag, i) => (
+                                    {project.tags.map((tag: string, i: number) => (
                                         <span key={i} className="text-[10px] font-mono tracking-widest uppercase text-white/40 border border-white/5 bg-white/[0.02] px-3 py-1.5 rounded-full">
                                             {tag}
                                         </span>

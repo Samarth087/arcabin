@@ -36,6 +36,31 @@ export interface HygraphProject {
   seoDescription?: string;
 }
 
+export interface HygraphBlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: {
+    raw: any;
+    html: string;
+    markdown: string;
+    text: string;
+  };
+  coverImage: {
+    url: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
 export interface ProjectsResponse {
   projects: HygraphProject[];
+}
+
+export interface BlogPostsResponse {
+  blogPosts: HygraphBlogPost[];
 }

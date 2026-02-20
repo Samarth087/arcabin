@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
-
-import { getAllBlogPosts } from "@/content/blog/posts";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { getQueryClient } from "@/lib/query-client";
+import { hygraph, BlogPostsResponse } from "@/lib/hygraph";
+import { GET_BLOG_POSTS_QUERY } from "@/hooks/useBlog";
+import { QUERY_KEYS } from "@/lib/query-keys";
+import BlogListInner from "./blog-list";
 import { getStaticPageMetadata } from "@/lib/seo";
-import BlogList from "./blog-list";
 import { fraunces } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = getStaticPageMetadata("blog");
 
-export default function BlogPage() {
-  const posts = getAllBlogPosts();
+export default async function BlogPage() {
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: QUERY_KEYS.blog.all,
+    queryFn: async () => {
+      const data = await hygraph.request<BlogPostsResponse>(GET_BLOG_POSTS_QUERY);
+      return data.blogPosts;
+    },
+  });
 
   return (
     <section className="px-4 md:px-6 py-24 min-h-screen bg-background selection:bg-primary/10">
@@ -28,7 +39,9 @@ export default function BlogPage() {
           </p>
         </div>
 
-        <BlogList posts={posts} />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <BlogListInner />
+        </HydrationBoundary>
       </div>
     </section>
   );
