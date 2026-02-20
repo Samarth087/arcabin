@@ -14,7 +14,7 @@ const testimonials = [
         avatar: "https://i.pravatar.cc/150?u=james",
     },
     {
-        content: "The workflow implementation was seamless. They didn't just build a site; they built a tool that scaled our business.",
+        content: "The workflow implementation was seamless. They didn&apos;t just build a site; they built a tool that scaled our business.",
         author: "Sarah Chen",
         role: "Director of Ops, Spark",
         avatar: "https://i.pravatar.cc/150?u=sarah",
@@ -43,18 +43,6 @@ const testimonials = [
         role: "VP of Marketing, Catalyst",
         avatar: "https://i.pravatar.cc/150?u=sophia",
     },
-    // {
-    //     content: "The AI automation they implemented saved our team hundreds of hours. A complete game changer for our operations.",
-    //     author: "Robert Chen",
-    //     role: "Director of IT, Scape",
-    //     avatar: "https://i.pravatar.cc/150?u=robert",
-    // },
-    // {
-    //     content: "From the first meeting to the final launch, the experience was world-class. Professionalism at its finest.",
-    //     author: "Linda Johnson",
-    //     role: "Founder, Aurora",
-    //     avatar: "https://i.pravatar.cc/150?u=linda",
-    // },
 ];
 
 export function TestimonialsSection({ className }: { className?: string }) {
@@ -76,7 +64,7 @@ export function TestimonialsSection({ className }: { className?: string }) {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="text-white/50 text-lg max-w-2xl mx-auto"
                     >
-                        Don't just take our word for it. Here's how we've helped
+                        Don&apos;t just take our word for it. Here&apos;s how we&apos;ve helped
                         ambitious companies reach their digital potential.
                     </motion.p>
                 </div>
@@ -106,15 +94,16 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
             </div>
 
             <p className="text-white/80 text-lg leading-relaxed mb-8 italic">
-                "{testimonial.content}"
+                &quot;{testimonial.content}&quot;
             </p>
 
             <div className="flex items-center gap-4">
-                <div className="size-12 rounded-full overflow-hidden border border-white/10">
-                    <img
+                <div className="size-12 rounded-full overflow-hidden border border-white/10 relative">
+                    <Image
                         src={testimonial.avatar}
                         alt={testimonial.author}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                     />
                 </div>
                 <div>

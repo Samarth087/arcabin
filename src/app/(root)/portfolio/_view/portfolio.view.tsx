@@ -10,37 +10,11 @@ import { cn } from "@/lib/utils";
 import { WorkflowSection } from "@/components/workflow-section";
 import { processSteps } from "@/constant/workflow";
 import { FeatureCard } from "@/components/feature-section";
-
-const allProjects = [
-    {
-        title: "Lumière Duplex",
-        description: "A modern desert retreat blending architecture and nature seamlessly. Large glass facades allow natural light to flood the interior.",
-        image: "/images/portfolio-1.png",
-        tag: "Residential",
-        location: "Featured Project",
-    },
-    {
-        title: "Solace Pavilion",
-        description: "Minimal living space with panoramic views designed for clarity. Every element is carefully curated to foster a sense of peace.",
-        image: "/images/portfolio-2.png",
-        tag: "Zen Space",
-        location: "Featured Project",
-    },
-    {
-        title: "Eon Capsule",
-        description: "Future-forward living concept pushing the boundaries of space efficiency. Innovative materials create a sustainable ecosystem.",
-        image: "/images/portfolio-1.png",
-        tag: "Futuristic",
-        location: "Featured Project",
-    },
-    {
-        title: "Nebula Heights",
-        description: "A sky-high urban oasis designed for modern professionals. Integrating green spaces with smart city technology for an unparalleled living experience.",
-        image: "/images/portfolio-2.png",
-        tag: "Commercial",
-        location: "New Project",
-    },
-];
+import { useProjects } from "@/hooks/useProjects";
+import { HygraphProject } from "@/lib/hygraph";
+import { fraunces, roboto } from "@/app/fonts";
+import Link from "next/link";
+import { useState } from "react";
 
 const expertise = [
     {
@@ -91,8 +65,10 @@ const expertise = [
 ];
 
 export function PortfolioView() {
+    const { data: projects, isLoading, isError } = useProjects();
+
     return (
-        <div className="bg-background relative overflow-hidden">
+        <div className="bg-background relative overflow-hidden selection:bg-primary/10">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
                 <div className="absolute top-[5%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[140px]" />
@@ -100,13 +76,13 @@ export function PortfolioView() {
                 <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-primary/8 rounded-full blur-[100px]" />
             </div>
 
-            <div className="container mx-auto px-4 py-32 lg:py-48">
+            <div className="container mx-auto px-4 md:px-6 py-24 lg:py-32 max-w-7xl">
                 {/* Hero Section */}
-                <div className="mb-32 lg:mb-40 text-center md:text-left">
+                <div className="mb-24 lg:mb-32 text-center md:text-left">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         className="mb-8 flex justify-center md:justify-start"
                     >
                         <div className="rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-md shadow-[0_0_20px_rgba(var(--primary),0.15)] ring-1 ring-white/5">
@@ -132,11 +108,40 @@ export function PortfolioView() {
                 </div>
 
                 {/* Projects Section - 2 Column Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-24 lg:gap-x-12 lg:gap-y-32">
-                    {allProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} index={index} />
-                    ))}
-                </div>
+                {isLoading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 lg:gap-x-12 lg:gap-y-24">
+                        {[1, 2, 3, 4].map((i) => (
+                            <div key={i} className="animate-pulse flex flex-col gap-6">
+                                <div className="aspect-[16/10] rounded-[2.5rem] bg-white/5" />
+                                <div className="space-y-3 px-4">
+                                    <div className="h-4 w-20 bg-white/5 rounded-full" />
+                                    <div className="h-8 w-64 bg-white/5 rounded-md" />
+                                    <div className="h-4 w-full bg-white/5 rounded-md" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : isError ? (
+                    <div className="text-center py-20 bg-white/5 rounded-[2.5rem] border border-white/10">
+                        <p className="text-white/60 mb-6 italic">Oops! We couldn&apos;t fetch our latest works right now.</p>
+                        <Button variant="outline" className="rounded-full" onClick={() => window.location.reload()}>
+                            Retry Connection
+                        </Button>
+                    </div>
+                ) : projects && projects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 lg:gap-x-12 lg:gap-y-24">
+                        {projects.map((project: HygraphProject, index: number) => (
+                            <ProjectCard key={project.id || index} project={project} index={index} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-20 bg-white/5 rounded-[2.5rem] border border-white/10">
+                        <p className="text-white/60 mb-6 italic">No projects found. Add some content in your Hygraph dashboard to see them here.</p>
+                        <Button variant="outline" className="rounded-full" onClick={() => window.location.reload()}>
+                            Refresh
+                        </Button>
+                    </div>
+                )}
 
                 {/* Professional Expertise Section */}
                 <div className="mt-64 lg:mt-96">
@@ -144,7 +149,7 @@ export function PortfolioView() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
+                            viewport={{ margin: "-100px" }}
                             className="mb-6 flex justify-center"
                         >
                             <div className="rounded-full border border-border/50 bg-secondary/30 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur-sm">
@@ -154,7 +159,7 @@ export function PortfolioView() {
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ margin: "-100px" }}
                             className="mb-8 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-white"
                         >
                             Elevating Through <span className="text-primary italic font-display">Craft.</span>
@@ -192,54 +197,105 @@ export function PortfolioView() {
     );
 }
 
-function ProjectCard({ project, index }: { project: any, index: number }) {
+function ProjectCard({ project, index }: { project: HygraphProject, index: number }) {
+    const isEven = index % 2 === 0;
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+        });
+    };
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index % 2 * 0.1, ease: [0.21, 0.45, 0.32, 0.9] }}
+            initial={{ opacity: 0, x: isEven ? -100 : 100, y: 50 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ margin: "-100px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="group flex flex-col gap-6"
         >
-            {/* Project Image Container - Static Banner */}
-            <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden bg-white/[0.02] border border-white/10 transition-colors duration-500 hover:border-primary/30 group/card">
-                <div className="absolute inset-0">
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover opacity-80 group-hover/card:opacity-100 transition-opacity duration-700"
-                    />
-                </div>
+            <Link
+                href={`/portfolio/${project.slug}`}
+                className="block cursor-none"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                {/* Project Image Container - Static Banner */}
+                <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden bg-white/[0.02] border border-white/10 transition-colors duration-500 hover:border-primary/30 group/card">
+                    <div className="absolute inset-0">
+                        <Image
+                            src={project.thumbnail?.url || ""}
+                            alt={project.name}
+                            fill
+                            className="object-cover opacity-80 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-700"
+                        />
+                    </div>
 
-                {/* Overlay on hover - Static (no translate) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                    <Button size="sm" className="rounded-full w-fit bg-primary hover:bg-white text-black transition-all duration-300 shadow-[0_0_25px_rgba(var(--primary),0.25)]">
-                        Explore <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                    </Button>
+                    {/* Custom Follow Cursor */}
+                    <motion.div
+                        className="pointer-events-none absolute z-50 flex items-center justify-center rounded-full bg-primary px-4 py-2 text-[10px] font-black uppercase tracking-widest text-black shadow-2xl"
+                        animate={{
+                            x: mousePos.x,
+                            y: mousePos.y,
+                            scale: isHovered ? 1 : 0,
+                            opacity: isHovered ? 1 : 0,
+                        }}
+                        transition={{ type: "spring", damping: 25, stiffness: 250, mass: 0.5 }}
+                        style={{
+                            translateX: "-50%",
+                            translateY: "-50%",
+                        }}
+                    >
+                        Explore <ExternalLink className="ml-1.5 h-3 w-3" />
+                    </motion.div>
+
+                    {/* Overlay on hover - Static (no translate) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
                 </div>
-            </div>
+            </Link>
 
             {/* Project Info - Compact typography */}
-            <div className="px-4 space-y-3">
-                <div className="flex items-center gap-2.5">
-                    <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-primary/70 border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full">
-                        {project.tag}
-                    </span>
-                    <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-white/30 italic">
-                        {project.location}
-                    </span>
+            <Link href={`/portfolio/${project.slug}`} className="px-4 space-y-3 block">
+                <div className="flex flex-wrap items-center gap-2">
+                    {project.tags?.slice(0, 3).map((tag: string, i: number) => {
+                        // Convert camelCase or snake_case to Title Case
+                        const formattedTag = tag
+                            .replace(/([A-Z])/g, ' $1')
+                            .replace(/^./, (str) => str.toUpperCase())
+                            .trim();
+                        return (
+                            <span key={i} className="text-[9px] font-mono tracking-[0.2em] uppercase text-primary/70 border border-primary/20 bg-primary/5 px-2.5 py-1 rounded-full whitespace-nowrap">
+                                {formattedTag}
+                            </span>
+                        );
+                    })}
+                    {project.tags?.length > 3 && (
+                        <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-white/30 px-1">
+                            +{project.tags.length - 3} more
+                        </span>
+                    )}
                 </div>
 
                 <div className="space-y-2">
-                    <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white group-hover:text-primary transition-colors duration-300">
-                        {project.title}
+                    <h3 className={cn(
+                        "text-3xl md:text-4xl font-bold tracking-tight text-white group-hover:text-primary transition-colors duration-300",
+                        fraunces.className
+                    )}>
+                        {project.name}
                     </h3>
-                    <p className="text-sm text-white/40 font-light leading-relaxed max-w-sm line-clamp-2">
-                        {project.description}
+                    <p className={cn(
+                        "text-sm text-white/40 font-light leading-relaxed max-w-sm line-clamp-2",
+                        roboto.className
+                    )}>
+                        {project.shortDescription || (typeof project.description === 'string' ? project.description : project.description?.text)}
                     </p>
                 </div>
-            </div>
+            </Link>
         </motion.div>
     );
 }

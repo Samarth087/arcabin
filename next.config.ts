@@ -33,6 +33,16 @@ const nextConfig: NextConfig = {
         hostname: "avatar.vercel.sh",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "ap-south-1.graphassets.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+        pathname: "/**",
+      },
     ],
   },
 };
