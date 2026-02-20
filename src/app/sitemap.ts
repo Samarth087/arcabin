@@ -3,7 +3,10 @@ import { getStaticPageUrl } from "@/lib/seo";
 import { hygraph } from "@/lib/hygraph";
 import { gql } from "graphql-request";
 
-const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://arkcabin.com").replace(/\/$/, "");
+export const revalidate = 86400; // regenerate sitemap every 24 hours
+
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://arkcabin.com")
+  .replace(/\/$/, "") || "https://arkcabin.com";
 
 const DYNAMIC_PATHS_QUERY = gql`
   query GetDynamicPaths {
