@@ -45,6 +45,23 @@ const GET_PROJECT_QUERY = gql`
       id
       name
       slug
+      tags
+      shortDescription
+      description {
+        text
+        markdown
+        html
+      }
+      thumbnail {
+        url
+      }
+      gallery {
+        url
+      }
+      url
+      isFeatured
+      seoTitle
+      seoDescription
     }
   }
 `;
