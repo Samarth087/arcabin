@@ -25,13 +25,15 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
         <main className="bg-background selection:bg-primary/10 min-h-screen pb-32">
             {/* Hero Section */}
             <section className="relative w-full aspect-[21/9] md:aspect-[24/10] overflow-hidden">
-                <Image
-                    src={data.thumbnail?.url || ""}
-                    alt={data.name}
-                    fill
-                    priority
-                    className="object-cover opacity-60"
-                />
+                {data.thumbnail?.url && (
+                    <Image
+                        src={data.thumbnail.url}
+                        alt={data.name}
+                        fill
+                        priority
+                        className="object-cover opacity-60"
+                    />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
                 <div className="absolute inset-0 flex flex-col justify-end">
@@ -42,7 +44,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                             transition={{ duration: 0.8 }}
                         >
                             <div className="flex flex-wrap gap-3 mb-6">
-                                {data.tags.map((tag: string, i: number) => (
+                                {data.tags?.map((tag: string, i: number) => (
                                     <Badge key={i} variant="outline" className="px-4 py-1.5 rounded-full border-primary/20 bg-primary/5 text-primary text-[10px] uppercase font-black tracking-widest">
                                         {tag}
                                     </Badge>
@@ -159,7 +161,7 @@ export function ProjectDetailView({ project: initialProject }: ProjectDetailView
                             <div className="px-4">
                                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6">Tags</h4>
                                 <div className="flex flex-wrap gap-2">
-                                    {data.tags.map((tag: string, i: number) => (
+                                    {data.tags?.map((tag: string, i: number) => (
                                         <span key={i} className="text-[10px] font-mono tracking-widest uppercase text-white/40 border border-white/5 bg-white/[0.02] px-3 py-1.5 rounded-full">
                                             {tag}
                                         </span>
